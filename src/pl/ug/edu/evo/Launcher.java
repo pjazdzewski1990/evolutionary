@@ -22,5 +22,7 @@ public class Launcher {
     List<Point> readPoints = Point.readPointsFromFile("datasets/data_2_2.txt");
     System.out.println("Read " + readPoints);
     
+    IterativeAlgorithm kmeans = new KMeans();
+    System.out.println(kmeans.nextRound(null));
   }
 }
