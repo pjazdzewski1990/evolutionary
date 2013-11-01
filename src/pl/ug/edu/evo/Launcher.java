@@ -19,7 +19,7 @@ public class Launcher {
   public static void main(String[] args) {
     System.out.println("Starting Evolutionary");
     
-    List<Point> readPoints = Point.readPointsFromFile();
+    List<Point> readPoints = Point.readPointsFromFile("datasets/data_2_2.txt");
     System.out.println("Read " + readPoints);
     
   }
