@@ -46,6 +46,11 @@ public class KMeans implements IterativeAlgorithm {
       Centroid centroid = (Centroid)point;
       newSolution.add(centroid.findNewPosition());
     }
+    //add points to centroids
+    for(Point point: environment){
+      Centroid closest = (Centroid)getNearest(newSolution, point);
+      closest.clusterPoint(point);
+    }
     return newSolution;
   }
 
@@ -98,5 +103,10 @@ public class KMeans implements IterativeAlgorithm {
     
 //    System.out.println("Distance between " + pointA + " and " + pointB + " is " + Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2)));
     return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+  }
+
+  @Override
+  public double evaluateSolution() {
+    return 0;
   }
 }

@@ -15,4 +15,10 @@ public interface IterativeAlgorithm {
    * @return
    */
   List<Point> initialSolution(int solutionsNum);
+  
+  /**
+   * Return double indicating how good the solution is
+   * @return
+   */
+  double evaluateSolution();
 }
