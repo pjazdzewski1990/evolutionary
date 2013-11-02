@@ -22,11 +22,11 @@ public class Centroid extends Point {
   
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("Centroid<");
+    StringBuilder sb = new StringBuilder("Centroid{ ");
     sb.append(super.toString());
     sb.append(" with ");
     sb.append(pointsInCluster.toString());
-    sb.append(">");
+    sb.append("}");
     return sb.toString();
   }
 }

@@ -27,10 +27,10 @@ public class Point {
    * @return
    */
   public Double getCoordinate(Character dimension) {
-    switch(Character.toLowerCase(dimension)){
-      case 'X': position.get(0);
-      case 'Y': position.get(1);
-      case 'Z': position.get(2);
+    switch(Character.toUpperCase(dimension)){
+      case 'X': return position.get(0);
+      case 'Y': return position.get(1);
+      case 'Z': return position.get(2);
       default: throw new IllegalArgumentException("No dimension specified for " + dimension);
     }
   }
@@ -41,7 +41,7 @@ public class Point {
   
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("Point<");
+    StringBuilder sb = new StringBuilder("<");
     for (Double pos : position) {
       sb.append(" ");
       sb.append(pos);

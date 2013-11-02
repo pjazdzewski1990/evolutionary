@@ -20,10 +20,16 @@ public class Launcher {
     System.out.println("Starting Evolutionary");
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
-    System.out.println("Read " + environment);
+    System.out.println("Read from file " + environment);
     
     IterativeAlgorithm kmeans = new KMeans(environment);
     List<Point> solution = kmeans.initialSolution(3);
-    System.out.println(solution);
+    
+    for(int round=1; round<3; round++){
+      System.out.println("Solution in round " + round + " is " + solution);
+      solution = kmeans.nextRound(solution);
+    }
+    
+    System.out.println("Solution " + solution);
   }
 }
