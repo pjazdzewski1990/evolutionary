@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.omg.CORBA._PolicyStub;
+
 /**
  * Represents point in n dimensional space
  * @author jfk
@@ -19,6 +21,11 @@ public class Point {
     position = _position;
   }
   
+  /**
+   * Get coordinate for input dimension. Dimension is repesented as char (x,y,z...)
+   * @param dimension
+   * @return
+   */
   public Double getCoordinate(Character dimension) {
     switch(Character.toLowerCase(dimension)){
       case 'X': position.get(0);
@@ -26,6 +33,10 @@ public class Point {
       case 'Z': position.get(2);
       default: throw new IllegalArgumentException("No dimension specified for " + dimension);
     }
+  }
+  
+  public List<Double> getCoordinateList() {
+    return position;
   }
   
   @Override
@@ -39,6 +50,11 @@ public class Point {
     return sb.toString();
   }
   
+  /**
+   * Reads points data from file. Each line represents one point, every value separated by space is a dimension
+   * @param path
+   * @return
+   */
   public static List<Point> readPointsFromFile(String path){
     List<Point> points = new ArrayList<>();
     
@@ -55,6 +71,11 @@ public class Point {
     return points;
   }
   
+  /**
+   * Helper for constructing Points
+   * @param strings
+   * @return
+   */
   public static Point fromStrings(String[] strings) {
     List<Double> pos = new ArrayList<>();
     for(String strPos: strings){

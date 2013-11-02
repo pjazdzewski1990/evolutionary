@@ -9,4 +9,10 @@ public interface IterativeAlgorithm {
    * @return List<Point>
    */
   List<Point> nextRound(List<Point> points);
+  /**
+   * Gets a basic solutions which will evolve over time
+   * @param solutionsNum How many solutions we expect at start
+   * @return
+   */
+  List<Point> initialSolution(int solutionsNum);
 }
