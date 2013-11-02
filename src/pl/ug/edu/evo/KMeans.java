@@ -41,8 +41,12 @@ public class KMeans implements IterativeAlgorithm {
 
   @Override
   public List<Point> nextRound(List<Point> points) {
-    List<Point> solution = new ArrayList<>();
-    return points;
+    List<Point> newSolution = new ArrayList<>();
+    for(Point point: points){
+      Centroid centroid = (Centroid)point;
+      newSolution.add(centroid.findNewPosition());
+    }
+    return newSolution;
   }
 
   @Override

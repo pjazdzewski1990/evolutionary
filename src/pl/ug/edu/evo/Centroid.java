@@ -20,6 +20,11 @@ public class Centroid extends Point {
     pointsInCluster.add(p);
   }
   
+  public Centroid findNewPosition(){
+    //TODO: need some math-magic for midpoint value 
+    return this;
+  }
+  
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("Centroid{ ");
