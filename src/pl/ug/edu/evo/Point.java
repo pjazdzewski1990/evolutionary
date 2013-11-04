@@ -41,13 +41,25 @@ public class Point {
   
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("<");
-    for (Double pos : position) {
-      sb.append(" ");
-      sb.append(pos);
-    }
-    sb.append(">");
-    return sb.toString();
+	  if(Launcher.json) {
+		  StringBuilder sb = new StringBuilder("{ \"coords\" : [");
+		    for (Double pos : position) {
+
+		      sb.append("\"" + pos + "\"");
+		      sb.append(",");
+		    }
+		    sb.deleteCharAt(sb.length()-1);
+		    sb.append("]}");
+		    return sb.toString();
+	  } else {
+	    StringBuilder sb = new StringBuilder("<");
+	    for (Double pos : position) {
+	      sb.append(" ");
+	      sb.append(pos);
+	    }
+	    sb.append(">");
+	    return sb.toString();
+	  }
   }
   
   /**
