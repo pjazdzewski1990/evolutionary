@@ -92,17 +92,22 @@ public class KMeans implements IterativeAlgorithm {
   }
 
   private Double distance(Point pointA, Point pointB) {
-    //TODO: many dimensions
-    double xA = pointA.getCoordinate('x');
-    double xB = pointB.getCoordinate('x');
-    double xDiff = Math.max(xA, xB) - Math.min(xA, xB);
-    
-    double yA = pointA.getCoordinate('y');
-    double yB = pointB.getCoordinate('y');
-    double yDiff = Math.max(yA, yB) - Math.min(yA, yB);
-    
-//    System.out.println("Distance between " + pointA + " and " + pointB + " is " + Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2)));
-    return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+
+	  int len = pointA.getCoordinateList().size();
+	  double total = 0;
+	  List<Double> posPointA = pointA.getCoordinateList();
+	  List<Double> posPointB = pointB.getCoordinateList();
+	  
+	  for(int i=0; i<len; i++) {
+		  
+		  total+=Math.pow(Math.max(posPointA.get(i), posPointB.get(i)) - Math.min(posPointA.get(i), posPointB.get(i)),2);
+		  
+	  }
+	  
+	  posPointA = null;
+	  posPointB = null;
+	  return Math.sqrt(total);
+
   }
 
   @Override
