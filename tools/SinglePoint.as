@@ -27,7 +27,7 @@
 			
 			
 			transf.color = uint(clr);
-			trace(clr);
+
 			pointSprite.transform.colorTransform = transf;
 			
 			
