@@ -42,21 +42,11 @@ public class Centroid extends Point {
   
   @Override
   public String toString() {
-	  if(Launcher.json) {
-		  StringBuilder sb = new StringBuilder("{ \"Centroid\" : [ ");
-		    sb.append(super.toString());
-		    sb.append(",");
-		    sb.append(pointsInCluster.toString());
-		    sb.append("]}");
-		    return sb.toString();
-	  }
-	  else {
-	    StringBuilder sb = new StringBuilder("Centroid{ ");
-	    sb.append(super.toString());
-	    sb.append(" with ");
-	    sb.append(pointsInCluster.toString());
-	    sb.append("}");
-	    return sb.toString();
-	  }
+    StringBuilder sb = new StringBuilder("{ \"Centroid\" : [ ");
+    sb.append(super.toString());
+    sb.append(",");
+    sb.append(pointsInCluster.toString());
+    sb.append("]}");
+    return sb.toString();
   }
 }
