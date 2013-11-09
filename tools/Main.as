@@ -22,7 +22,10 @@
 		public var bgScaleX:Number;
 		public var bgScaleY:Number;
 		public var scaleSet:Boolean = false;
+		public var bg:Sprite;
 		public function Main() {
+			reDrawBg();
+			
 			this.addEventListener(Event.ADDED_TO_STAGE, ready);
 		}
 		
@@ -30,7 +33,7 @@
 			
 			flush(lines);
 			flush(points);
-
+			
 
 			drawBtn.addEventListener(MouseEvent.CLICK, tracePoints);
 			phaseList.addEventListener(Event.CHANGE, selectItem);
@@ -59,6 +62,25 @@
 
 			phaseList.dataProvider = new DataProvider(items); 
 
+		}
+		
+		public function reDrawBg() {
+			if(this.bg!=null) {
+				this.removeChild(bg);
+			}
+			this.bg = null;
+			
+			
+			this.bg = new Sprite();
+			bg.graphics.lineStyle(0);
+			bg.graphics.beginFill(0xDDDDDD, 0.6);
+			bg.graphics.drawRect(0,0, 970, 600);
+			bg.graphics.endFill();
+			
+			bg.x = 15;
+			bg.y = 95;
+			this.addChild(bg);
+			
 		}
 		
 		public function selectItem(e:Event) {
@@ -162,7 +184,7 @@
 					bg.removeChildAt(1);
 				}
 			if(ob!=null&&ob.length>0) {
-				
+				reDrawBg();
 				for(var i:int = 0; i<ob.length; i++) {
 					
 
