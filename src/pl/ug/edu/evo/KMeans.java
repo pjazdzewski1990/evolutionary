@@ -82,7 +82,7 @@ public class KMeans implements IterativeAlgorithm {
     Double minDistance = 0d;
     for(Point centroid: centroids){
       Double distance = distance(centroid, point);
-      if(closestCentroid==null || minDistance<distance){
+      if(closestCentroid == null || minDistance > distance){
         minDistance = distance;
         closestCentroid = centroid;
       }

@@ -18,7 +18,7 @@ public class Launcher {
 
   public static void main(String[] args) {
   
-    System.out.println("Starting Evolutionary");
+//    System.out.println("Starting Evolutionary");
     System.out.println("{ \"json\" : {");
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
