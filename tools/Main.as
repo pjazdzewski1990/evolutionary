@@ -6,6 +6,7 @@
 	import flash.geom.Point;
 	import flash.events.MouseEvent;
 	import fl.data.DataProvider;
+	import fl.motion.MotionEvent;
 	
 	
 	public class Main extends MovieClip {
@@ -23,6 +24,7 @@
 		public var bgScaleY:Number;
 		public var scaleSet:Boolean = false;
 		public var bg:Sprite;
+		public var currentSelect:int = 0;
 		public function Main() {
 			reDrawBg();
 			
@@ -37,9 +39,30 @@
 
 			drawBtn.addEventListener(MouseEvent.CLICK, tracePoints);
 			phaseList.addEventListener(Event.CHANGE, selectItem);
-			
+			prevBtn.addEventListener(MouseEvent.CLICK, switchItems);
+			nextBtn.addEventListener(MouseEvent.CLICK, switchItems);
 
 			
+			
+		}
+		private function switchItems(e:MouseEvent) {
+				switch(e.target) {
+					case prevBtn:
+						if(currentSelect>0) {
+							currentSelect-=1;
+							phaseList.selectedIndex = currentSelect;
+							itemChosed();
+						}
+					break;
+					
+					case nextBtn:
+						if(currentSelect<json.json.round.length+1) {
+						currentSelect+=1;
+						phaseList.selectedIndex = currentSelect;
+						itemChosed();
+						}
+					break;
+				}
 			
 		}
 		
@@ -85,21 +108,26 @@
 		
 		public function selectItem(e:Event) {
 
-			var num:int = 0;
+
 			
-			num = ComboBox(e.target).selectedItem.data;
-			trace(num);
-			if(num==0) {
-				drawPoints(json.json.points);
-				
-			} else if(num==items.length-1) {
-				drawPoints(json.json.solution, true);
-			} else {
-				drawPoints(json.json.round[num-1].solution, true);
-			}
+			currentSelect = ComboBox(e.target).selectedItem.data;
+			
+
+			itemChosed();
 
 			
 			
+		}
+		
+		private function itemChosed() {
+			if(currentSelect==0) {
+				drawPoints(json.json.points);
+				
+			} else if(currentSelect==items.length-1) {
+				drawPoints(json.json.solution, true);
+			} else {
+				drawPoints(json.json.round[currentSelect-1].solution, true);
+			}
 		}
 		
 		public function drawPoints(list:*, cent:Boolean=false) {
@@ -171,6 +199,11 @@
 		//	trace(x);
 			help.centroid =c;
 			help.setColor();
+			if(etyk.length>5) {
+				help.isCentroid(true);
+			} else {
+				help.isCentroid(false);
+			}
 			help.etykieta.text=etyk + "X: " + x0 + ", Y: " + y0;
 			
 			points.push(help);
@@ -202,7 +235,7 @@
 		public function drawLine(centroidX, centroidY, ptX, ptY) {
 
 			var line:Sprite = new Sprite();
-			line.graphics.lineStyle(1,0x00ff00,0.3);
+			line.graphics.lineStyle(2,0x00ff00,0.7);
 			line.graphics.moveTo(centroidX, centroidY);
 			line.graphics.lineTo(ptX, ptY);
 			lines.push(line);

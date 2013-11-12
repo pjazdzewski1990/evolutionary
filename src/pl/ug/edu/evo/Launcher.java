@@ -15,10 +15,11 @@ import java.util.List;
    Heidelberg, 2007
  */
 public class Launcher {
-
+	 public static int MAX_ROUNDS = 4;
   public static void main(String[] args) {
   
 //    System.out.println("Starting Evolutionary");
+	 
     System.out.println("{ \"json\" : {");
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
@@ -30,9 +31,9 @@ public class Launcher {
     
     System.out.println("\"round\": [");
 
-    for(int round=1; round<3; round++){
+    for(int round=1; round<MAX_ROUNDS; round++){
       System.out.println("{ \"solution\" : " + solution + "}");
-      if(round<2) System.out.println(",");
+      if(round<MAX_ROUNDS-1) System.out.println(",");
       solution = kmeans.nextRound(solution);
     }
     System.out.println("],");

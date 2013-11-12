@@ -2,6 +2,8 @@
 	
 	import flash.display.MovieClip;
 	import flash.geom.ColorTransform;
+	import flash.events.MouseEvent;
+	
 
 	
 	
@@ -10,8 +12,35 @@
 		public var multip:Number = 1;
 		public var centroid:int = 0;
 		
+		
 		public function SinglePoint() {
 			// constructor code
+			this.etykieta.visible = false;
+			this.pointSprite.addEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+			this.pointSprite.addEventListener(MouseEvent.MOUSE_OUT, mouseHandler);
+		}
+
+		public function isCentroid(p:Boolean) {
+			if(p) {
+				marker.gotoAndStop(2);
+				
+			} else {
+				marker.gotoAndStop(1);
+			}
+		}
+		
+		public function mouseHandler(e:MouseEvent) {
+			switch (e.type) {
+				case "mouseOver":
+					this.etykieta.visible = true;
+				break;
+				
+				case "mouseOut":
+					this.etykieta.visible = false;
+				break;
+	
+			}
+			
 		}
 		
 		public function setColor() {
