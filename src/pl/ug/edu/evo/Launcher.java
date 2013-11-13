@@ -2,6 +2,8 @@ package pl.ug.edu.evo;
 
 import java.util.List;
 
+import pl.ug.edu.evo.kmeans.KMeans;
+
 /* Using data from http://www.isical.ac.in/~sanghami/data.html
    S. Bandyopadhyay and U. Maulik, ``An Evolutionary Technique Based on K-Means for
    Optimal Clustering in R^N'', Information Sciences, vol. 146, pp. 221-237, 2002
@@ -26,7 +28,7 @@ public class Launcher {
     System.out.println("\"points\": " + environment + ",");
     
     IterativeAlgorithm kmeans = new KMeans(environment);
-    List<Point> solution = kmeans.initialSolution(CLUSTER_NUM);
+    IterationSolution solution = kmeans.initialSolution(CLUSTER_NUM);
     
     System.out.println("\"round\": [");
 
