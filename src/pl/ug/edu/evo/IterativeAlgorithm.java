@@ -1,7 +1,5 @@
 package pl.ug.edu.evo;
 
-import java.util.List;
-
 public interface IterativeAlgorithm {
   /**
    * Returns computation result for inserted data, being another step in algorithm

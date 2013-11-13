@@ -20,15 +20,6 @@ public class KMeansSolution implements IterationSolution {
 
   @Override
   public String asJValue() {
-    return null;
-  }
-
-  public List<Point> asPoints() {
-    return points;
-  }
-  
-  @Override
-  public String toString() {
     StringBuffer sb = new StringBuffer("[");
     for(Point p : points){
       sb.append(p.toString());
@@ -37,5 +28,14 @@ public class KMeansSolution implements IterationSolution {
     sb.deleteCharAt(sb.length()-1);
     sb.append("]");
     return sb.toString();
+  }
+
+  public List<Point> asPoints() {
+    return points;
+  }
+  
+  @Override
+  public String toString() {
+    return asJValue();
   }
 }
