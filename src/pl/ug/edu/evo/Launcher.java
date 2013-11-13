@@ -15,11 +15,10 @@ import java.util.List;
    Heidelberg, 2007
  */
 public class Launcher {
-	 public static int MAX_ROUNDS = 4;
-  public static void main(String[] args) {
   
-//    System.out.println("Starting Evolutionary");
-	 
+  public static void main(String[] args) {
+    int MAX_ROUNDS = 4;
+    int CLUSTER_NUM = 3;
     System.out.println("{ \"json\" : {");
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
@@ -27,7 +26,7 @@ public class Launcher {
     System.out.println("\"points\": " + environment + ",");
     
     IterativeAlgorithm kmeans = new KMeans(environment);
-    List<Point> solution = kmeans.initialSolution(3);
+    List<Point> solution = kmeans.initialSolution(CLUSTER_NUM);
     
     System.out.println("\"round\": [");
 
