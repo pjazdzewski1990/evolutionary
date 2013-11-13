@@ -2,6 +2,7 @@ package pl.ug.edu.evo;
 
 import java.util.List;
 
+import pl.ug.edu.evo.grid.Point;
 import pl.ug.edu.evo.kmeans.KMeans;
 
 /* Using data from http://www.isical.ac.in/~sanghami/data.html

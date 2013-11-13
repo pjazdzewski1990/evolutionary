@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import pl.ug.edu.evo.Centroid;
 import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.IterativeAlgorithm;
-import pl.ug.edu.evo.Point;
+import pl.ug.edu.evo.grid.Centroid;
+import pl.ug.edu.evo.grid.Point;
 
 public class KMeans implements IterativeAlgorithm {
 

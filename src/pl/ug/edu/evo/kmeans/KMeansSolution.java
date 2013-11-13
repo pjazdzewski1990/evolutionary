@@ -3,7 +3,7 @@ package pl.ug.edu.evo.kmeans;
 import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
-import pl.ug.edu.evo.Point;
+import pl.ug.edu.evo.grid.Point;
 
 public class KMeansSolution implements IterationSolution {
 

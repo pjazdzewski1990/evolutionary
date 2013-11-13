@@ -1,4 +1,4 @@
-package pl.ug.edu.evo;
+package pl.ug.edu.evo.grid;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
