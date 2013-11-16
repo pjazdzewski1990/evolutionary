@@ -6,7 +6,7 @@ import java.util.List;
 import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.IterativeAlgorithm;
 
-public class Genetic implements IterativeAlgorithm {
+public class GeneticAlgorithm implements IterativeAlgorithm {
 
   @Override
   public IterationSolution nextRound(IterationSolution previousPopulation) {
@@ -16,15 +16,14 @@ public class Genetic implements IterativeAlgorithm {
 
   @Override
   public IterationSolution initialSolution(int solutionsNum) {
-    List<GeneticCentroid> random = new ArrayList<>(solutionsNum);
+    List<ClusteringSolution> random = new ArrayList<>(solutionsNum);
     for(int i=0; i<solutionsNum; i++){
-      random.add(randomGeneticCentroid());
+      random.add(randomClusterSolution());
     }
     return new Population(random);
   }
 
-  private GeneticCentroid randomGeneticCentroid() {
-    return null; //TODO: implement
+  private ClusteringSolution randomClusterSolution() {
+    return new ClusteringSolution(); //TODO: implement
   }
-
 }
