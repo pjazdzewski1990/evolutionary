@@ -84,4 +84,24 @@ public class Point {
     }
     return new Point(pos);
   }
+  
+  /**
+   * Gets max (in absolute sense) values for each dimension for current environemnt
+   * @param environment
+   * @return
+   */
+  public static List<Double> calculateRanges(List<Point> environment){
+    //TODO: SIMPLIFY & restrict area
+    List<Double> envRanges = environment.get(0).getCoordinateList();
+    for(Point p : environment) {
+      List<Double> position = p.getCoordinateList();
+      for(int i=0; i<position.size(); i++){
+        double absolutValue = Math.abs(position.get(i));
+        if(envRanges.get(i) != null && Math.abs(envRanges.get(i)) <= absolutValue) {
+          envRanges.set(i, absolutValue);
+        }
+      }
+    }
+    return envRanges;
+  }
 }

@@ -18,29 +18,9 @@ public class KMeans implements IterativeAlgorithm {
   int dimensions;
 
   public KMeans(List<Point> _environment){
-    ranges = calculateRanges(_environment);
+    ranges = Point.calculateRanges(_environment);
     dimensions = ranges.size();
     environment = _environment;
-  }
-
-  /**
-   * Gets max (in absolute sense) values for each dimension for current environemnt
-   * @param environment
-   * @return
-   */
-  private List<Double> calculateRanges(List<Point> environment){
-    //TODO: SIMPLIFY & restrict area
-    List<Double> envRanges = environment.get(0).getCoordinateList();
-    for(Point p : environment) {
-      List<Double> position = p.getCoordinateList();
-      for(int i=0; i<position.size(); i++){
-        double absolutValue = Math.abs(position.get(i));
-        if(envRanges.get(i) != null && Math.abs(envRanges.get(i)) <= absolutValue) {
-          envRanges.set(i, absolutValue);
-        }
-      }
-    }
-    return envRanges;
   }
 
   @Override
@@ -63,18 +43,7 @@ public class KMeans implements IterativeAlgorithm {
 
   @Override
   public IterationSolution initialSolution(int solutionsNum) {
-    Random generator = new Random();
-    List<Point> initial = new ArrayList<>();
-    
-    for(int i=0; i<solutionsNum; i++){
-      List<Double> center = new ArrayList<>();
-      for(int j=0; j<dimensions; j++){
-        double range = ranges.get(j);
-        double randomPoint = (generator.nextDouble() * 2 * range) - range;
-        center.add(randomPoint);
-      }
-      initial.add(new Centroid(center));
-    }
+    List<Point> initial = Centroid.generateRandom(solutionsNum, dimensions, ranges);
     //add points to centroids
     for(Point point: environment){
       Centroid closest = (Centroid)getNearest(initial, point);

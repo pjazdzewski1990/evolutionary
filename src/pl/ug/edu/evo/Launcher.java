@@ -3,6 +3,7 @@ package pl.ug.edu.evo;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.ug.edu.evo.genetic.GeneticAlgorithm;
 import pl.ug.edu.evo.grid.Point;
 import pl.ug.edu.evo.kmeans.KMeans;
 
@@ -23,12 +24,12 @@ public class Launcher {
   public static void main(String[] args) {
     List<String> jsonBuffer = new ArrayList<>();
     
-    int MAX_ROUNDS = 4;
+    int MAX_ROUNDS = 2;
     int CLUSTER_NUM = 3;
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
     
-    IterativeAlgorithm kmeans = new KMeans(environment);
+    IterativeAlgorithm kmeans = new KMeans(environment);  //GeneticAlgorithm(environment);
     IterationSolution solution = kmeans.initialSolution(CLUSTER_NUM);
 
     for(int round=1; round<MAX_ROUNDS; round++){
