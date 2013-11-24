@@ -1,6 +1,7 @@
 package pl.ug.edu.evo.genetic;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import pl.ug.edu.evo.IterationSolution;
 
@@ -14,18 +15,20 @@ import pl.ug.edu.evo.IterationSolution;
  */
 public class Population implements IterationSolution {
 
-  private List<ClusteringSolution> solutions;
+  private ConcurrentSkipListSet<GeneticClusteringSolution> solutions;
 
-  public Population(List<ClusteringSolution> _solutions) {}
+  public Population(List<GeneticClusteringSolution> _solutions) {
+    solutions = new ConcurrentSkipListSet<>(_solutions); 
+  }
 
-@Override
-  public double bestScore() {
-    return 0;
+  @Override
+  public double score() {
+    return solutions.first().score();
   }
 
   @Override
   public String asJValue() {
-    return "";
+    return solutions.first().asJValue();
   }
 
 }

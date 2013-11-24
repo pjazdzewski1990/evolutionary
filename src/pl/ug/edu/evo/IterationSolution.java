@@ -5,7 +5,7 @@ public interface IterationSolution {
    * Return double indicating how good the solution is
    * @return Score as double
    */
-  double bestScore();
+  double score();
   
   /**
    * Get a json representation

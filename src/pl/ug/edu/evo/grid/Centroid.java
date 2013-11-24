@@ -49,4 +49,20 @@ public class Centroid extends Point {
     sb.append("]}");
     return sb.toString();
   }
+  
+  public static List<Point> generateRandom(int solutionsNum, int dimensions, List<Double> ranges){
+    Random generator = new Random();
+    List<Point> initial = new ArrayList<>();
+    
+    for(int i=0; i<solutionsNum; i++){
+      List<Double> center = new ArrayList<>();
+      for(int j=0; j<dimensions; j++){
+        double range = ranges.get(j);
+        double randomPoint = (generator.nextDouble() * 2 * range) - range;
+        center.add(randomPoint);
+      }
+      initial.add(new Centroid(center));
+    }
+    return initial;
+  }
 }

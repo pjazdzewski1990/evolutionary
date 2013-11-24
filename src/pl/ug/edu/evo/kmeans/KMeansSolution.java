@@ -14,7 +14,7 @@ public class KMeansSolution implements IterationSolution {
   }
 
   @Override
-  public double bestScore() {
+  public double score() {
     //TODO: implement
     return 0;
   }
