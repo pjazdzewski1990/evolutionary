@@ -1,24 +1,16 @@
 package pl.ug.edu.evo;
 
-import java.util.List;
-
 public interface IterativeAlgorithm {
   /**
-   * Returns computation result for inserted data (points List), being another step in algorithm
-   * @param points
-   * @return List<Point>
+   * Returns computation result for inserted data, being another step in algorithm
+   * @param IterationSolution Solution after n steps
+   * @return IterationSolution Solution after n+1 steps
    */
-  List<Point> nextRound(List<Point> points);
+  IterationSolution nextRound(IterationSolution points);
   /**
    * Gets a basic solutions which will evolve over time
    * @param solutionsNum How many solutions we expect at start
    * @return
    */
-  List<Point> initialSolution(int solutionsNum);
-  
-  /**
-   * Return double indicating how good the solution is
-   * @return
-   */
-  double evaluateSolution();
+  IterationSolution initialSolution(int solutionsNum);
 }

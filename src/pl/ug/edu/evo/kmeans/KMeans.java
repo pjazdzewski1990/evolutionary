@@ -1,10 +1,15 @@
-package pl.ug.edu.evo;
+package pl.ug.edu.evo.kmeans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import pl.ug.edu.evo.IterationSolution;
+import pl.ug.edu.evo.IterativeAlgorithm;
+import pl.ug.edu.evo.grid.Centroid;
+import pl.ug.edu.evo.grid.Point;
 
 public class KMeans implements IterativeAlgorithm {
 
@@ -24,7 +29,7 @@ public class KMeans implements IterativeAlgorithm {
    * @return
    */
   private List<Double> calculateRanges(List<Point> environment){
-    //SIMPLIFY
+    //TODO: SIMPLIFY & restrict area
     List<Double> envRanges = environment.get(0).getCoordinateList();
     for(Point p : environment) {
       List<Double> position = p.getCoordinateList();
@@ -35,12 +40,14 @@ public class KMeans implements IterativeAlgorithm {
         }
       }
     }
-    //System.out.println("Foo " + envRanges);
     return envRanges;
   }
 
   @Override
-  public List<Point> nextRound(List<Point> points) {
+  public IterationSolution nextRound(IterationSolution previousStep) {
+    //TODO: what a shitty solution. I don't like this cast and the idea that sending other subtype of IterationSolution will blow the system up 
+    List<Point> points = ((KMeansSolution)previousStep).asPoints();
+    
     List<Point> newSolution = new ArrayList<>();
     for(Point point: points){
       Centroid centroid = (Centroid)point;
@@ -51,11 +58,11 @@ public class KMeans implements IterativeAlgorithm {
       Centroid closest = (Centroid)getNearest(newSolution, point);
       closest.clusterPoint(point);
     }
-    return newSolution;
+    return new KMeansSolution(newSolution);
   }
 
   @Override
-  public List<Point> initialSolution(int solutionsNum) {
+  public IterationSolution initialSolution(int solutionsNum) {
     Random generator = new Random();
     List<Point> initial = new ArrayList<>();
     
@@ -74,7 +81,7 @@ public class KMeans implements IterativeAlgorithm {
       closest.clusterPoint(point);
     }
     
-    return initial;
+    return new KMeansSolution(initial);
   }
 
   private Centroid getNearest(List<Point> centroids, Point point) {
@@ -93,25 +100,19 @@ public class KMeans implements IterativeAlgorithm {
 
   private Double distance(Point pointA, Point pointB) {
 
-	  int len = pointA.getCoordinateList().size();
-	  double total = 0;
-	  List<Double> posPointA = pointA.getCoordinateList();
-	  List<Double> posPointB = pointB.getCoordinateList();
-	  
-	  for(int i=0; i<len; i++) {
-		  
-		  total+=Math.pow(Math.max(posPointA.get(i), posPointB.get(i)) - Math.min(posPointA.get(i), posPointB.get(i)),2);
-		  
-	  }
-	  
-	  posPointA = null;
-	  posPointB = null;
-	  return Math.sqrt(total);
+    int len = pointA.getCoordinateList().size();
+    double total = 0;
+    List<Double> posPointA = pointA.getCoordinateList();
+    List<Double> posPointB = pointB.getCoordinateList();
 
-  }
+    for(int i=0; i<len; i++) {
+      double max = Math.max(posPointA.get(i), posPointB.get(i));
+      double min = Math.min(posPointA.get(i), posPointB.get(i));
+      total += Math.pow(max - min,2);
+    }
 
-  @Override
-  public double evaluateSolution() {
-    return 0;
+    posPointA = null;
+    posPointB = null;
+    return Math.sqrt(total);
   }
 }

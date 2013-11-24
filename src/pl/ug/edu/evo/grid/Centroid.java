@@ -1,4 +1,4 @@
-package pl.ug.edu.evo;
+package pl.ug.edu.evo.grid;
 
 import java.util.ArrayList;
 import java.util.HashSet;
