@@ -40,6 +40,23 @@ public class Centroid extends Point {
     return new Centroid(pos);
   }
   
+  /**
+   * BEWARE OVERFLOW ERRORS! Might return Double.MAX_VALUE
+   * @return double 
+   */
+  public double calculateClusterInternalDistance(){
+    if(pointsInCluster.size()>0){
+      double sum = 0;
+      Point center = this;
+      for(Point p: pointsInCluster) {
+        sum += Point.distance(p, center);
+      }
+      return sum;
+    }else{
+      return Double.MAX_VALUE;
+    }
+  }
+  
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("{ \"Centroid\" : [ ");
@@ -64,5 +81,19 @@ public class Centroid extends Point {
       initial.add(new Centroid(center));
     }
     return initial;
+  }
+  
+  public static Centroid getNearestCentroid(List<Point> centroids, Point point) {
+    Point closestCentroid = null;
+    Double minDistance = 0d;
+    for(Point centroid: centroids){
+      Double distance = Point.distance(centroid, point);
+      if(closestCentroid == null || minDistance > distance){
+        minDistance = distance;
+        closestCentroid = centroid;
+      }
+    }
+    
+    return (Centroid)closestCentroid;
   }
 }

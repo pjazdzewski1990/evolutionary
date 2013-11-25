@@ -29,12 +29,13 @@ public class Launcher {
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
     
-    IterativeAlgorithm kmeans = new KMeans(environment);  //GeneticAlgorithm(environment);
-    IterationSolution solution = kmeans.initialSolution(CLUSTER_NUM);
+//    IterativeAlgorithm alg = new KMeans(environment);
+    IterativeAlgorithm alg = new GeneticAlgorithm(environment);
+    IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
 
     for(int round=1; round<MAX_ROUNDS; round++){
       jsonBuffer.add(solution.asJValue());
-      solution = kmeans.nextRound(solution);
+      solution = alg.nextRound(solution);
     }
     
     System.out.println(historyAsJson(environment, jsonBuffer));

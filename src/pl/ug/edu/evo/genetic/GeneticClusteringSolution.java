@@ -22,9 +22,18 @@ public class GeneticClusteringSolution
     centroids = _centroids;
   }
 
-@Override
+  @Override
   public double score() {
-    return 0;
+    double score = 0;
+    for(Centroid c : centroids){
+      double partialResult = c.calculateClusterInternalDistance();
+      if(partialResult == Double.MAX_VALUE){
+        score = Double.MAX_VALUE;
+      }else{
+        score += partialResult;
+      }
+    }
+    return score;
   }
 
   @Override

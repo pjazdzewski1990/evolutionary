@@ -104,4 +104,21 @@ public class Point {
     }
     return envRanges;
   }
+  
+  public static Double distance(Point pointA, Point pointB) {
+    int len = pointA.getCoordinateList().size();
+    double total = 0;
+    List<Double> posPointA = pointA.getCoordinateList();
+    List<Double> posPointB = pointB.getCoordinateList();
+
+    for(int i=0; i<len; i++) {
+      double max = Math.max(posPointA.get(i), posPointB.get(i));
+      double min = Math.min(posPointA.get(i), posPointB.get(i));
+      total += Math.pow(max - min,2);
+    }
+
+    posPointA = null;
+    posPointB = null;
+    return Math.sqrt(total);
+  }
 }
