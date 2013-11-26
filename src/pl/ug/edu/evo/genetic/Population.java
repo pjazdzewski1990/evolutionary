@@ -25,14 +25,20 @@ public class Population implements IterationSolution {
   public Population nextPopulation() {
 	  
 	  for(GeneticClusteringSolution s : solutions) {
+		  
+		  //nowa lista centroidow
 		  for(Centroid c : s.centroids) {
 			  
 			  c.mutate();
 			  
 		  }
 		  
+		  //krzyzowanie
+		  
 		  
 	  }
+	  
+	  //przypisanie nowych punktow do zmutowanych/skrzyzowanych centroidow
 	  
 	  return null;
   }
