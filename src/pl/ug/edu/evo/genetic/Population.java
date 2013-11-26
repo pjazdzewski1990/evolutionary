@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import pl.ug.edu.evo.IterationSolution;
+import pl.ug.edu.evo.grid.Centroid;
 
 /**
  * Obiekt zawierający wiele potencjalnych rozwiązań zadanego 
@@ -19,6 +20,21 @@ public class Population implements IterationSolution {
 
   public Population(List<GeneticClusteringSolution> _solutions) {
     solutions = new ConcurrentSkipListSet<>(_solutions); 
+  }
+  
+  public Population nextPopulation() {
+	  
+	  for(GeneticClusteringSolution s : solutions) {
+		  for(Centroid c : s.centroids) {
+			  
+			  c.mutate();
+			  
+		  }
+		  
+		  
+	  }
+	  
+	  return null;
   }
 
   @Override
