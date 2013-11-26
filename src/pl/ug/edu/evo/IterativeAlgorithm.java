@@ -1,5 +1,9 @@
 package pl.ug.edu.evo;
 
+import java.util.List;
+
+import pl.ug.edu.evo.grid.Centroid;
+
 public interface IterativeAlgorithm {
   /**
    * Returns computation result for inserted data, being another step in algorithm
@@ -13,4 +17,6 @@ public interface IterativeAlgorithm {
    * @return
    */
   IterationSolution initialSolution(int solutionsNum);
+  
+  
 }

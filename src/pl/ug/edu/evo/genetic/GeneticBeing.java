@@ -1,5 +1,7 @@
 package pl.ug.edu.evo.genetic;
 
+import pl.ug.edu.evo.grid.Centroid;
+
 //TODO: needs sensible name
 /**
  * Interfejs definiuje podstawowe operatory geentyczne:
@@ -7,6 +9,6 @@ package pl.ug.edu.evo.genetic;
  * @author jfk
  */
 public interface GeneticBeing {
-  GeneticBeing mutate(GeneticBeing _);
-  GeneticBeing breed(GeneticBeing a, GeneticBeing b);
+  //Centroid mutate(Centroid parent);
+  Centroid breed(Centroid a, Centroid b);
 }

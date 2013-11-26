@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import pl.ug.edu.evo.genetic.GeneticCentroid;
+
 /**
  * Represents a centroid in k-means algorithm
  * @author jfk
  */
-public class Centroid extends Point {
+public class Centroid extends Point implements GeneticCentroid {
 
   private Set<Point> pointsInCluster = new HashSet<>();
   
@@ -18,9 +20,22 @@ public class Centroid extends Point {
     super(_position);
   }
   
+
+  
   public void clusterPoint(Point p) {
     pointsInCluster.add(p);
   }
+  
+  public Set<Point> getPointsInCluster() {
+	  
+	  return pointsInCluster;
+  }
+  
+  public void setPointsInCluster(Set<Point> _pointsInCluster) {
+	  
+	  this.pointsInCluster = _pointsInCluster;
+  }
+  
   
   public Centroid findNewPosition(){
     Random generator = new Random();
@@ -96,4 +111,21 @@ public class Centroid extends Point {
     
     return (Centroid)closestCentroid;
   }
+
+
+
+@Override
+public Centroid mutate() {
+	List<Double> coords = new ArrayList<Double>();
+
+	for(Double d : this.getCoordinateList()) {
+		double rand = (Math.random()*4)-2;
+		coords.add(d*rand);/////////////////////////////////////////////////////
+		
+	}
+		
+
+	Centroid breed = new Centroid(coords);
+	return breed;
+}
 }

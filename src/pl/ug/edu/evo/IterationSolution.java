@@ -1,5 +1,9 @@
 package pl.ug.edu.evo;
 
+import java.util.List;
+
+import pl.ug.edu.evo.grid.Centroid;
+
 public interface IterationSolution {
   /**
    * Return double indicating how good the solution is
@@ -12,4 +16,5 @@ public interface IterationSolution {
    * @return
    */
   String asJValue();
+
 }

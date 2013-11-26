@@ -1,7 +1,9 @@
 package pl.ug.edu.evo.genetic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.grid.Centroid;
@@ -14,7 +16,7 @@ import pl.ug.edu.evo.grid.Point;
  * @author jfk
  */
 public class GeneticClusteringSolution 
-  implements IterationSolution, Comparable<GeneticClusteringSolution> {
+  implements IterationSolution, Comparable<GeneticClusteringSolution>, GeneticBeing {
 
   protected List<Centroid> centroids = new ArrayList<>();
 
@@ -57,4 +59,19 @@ public class GeneticClusteringSolution
 
     return score0 < score1? 1 : 0;
   }
+
+  public List<Centroid> getCentroids() {
+	  return this.centroids;
+  }
+  
+
+
+@Override
+public Centroid breed(Centroid a, Centroid b) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
 }

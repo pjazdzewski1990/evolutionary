@@ -23,6 +23,15 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   @Override
   public IterationSolution nextRound(IterationSolution previousPopulation) {
     //selection, mutation, breeding comes here
+	  List<Centroid> centroids = new ArrayList<Centroid>();
+	  for(Centroid c : previousPopulation.getCentroids()) { /// musimy otrzymywac liste centroidów z danej populacji, obecnie nie wiem do którego interfejsu to dodaæ
+		  
+		  centroids.add(c.mutate());
+		  
+	  }
+	  
+	  GeneticClusteringSolution pop = new GeneticClusteringSolution(centroids);
+	  
     return previousPopulation; //TODO: implement
   }
 
