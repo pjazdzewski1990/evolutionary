@@ -23,9 +23,12 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   @Override
   public IterationSolution nextRound(IterationSolution previousPopulation) {
     //selection, mutation, breeding comes here
-	//population.nextPopulation();
-	  
-    return previousPopulation; //TODO: implement
+    if(previousPopulation instanceof Population) {
+      Population pop = (Population)previousPopulation;
+      return pop.nextPopulation();
+    }else{
+      return previousPopulation;
+    }
   }
 
   @Override

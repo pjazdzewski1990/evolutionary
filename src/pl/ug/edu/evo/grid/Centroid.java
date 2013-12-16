@@ -12,7 +12,7 @@ import pl.ug.edu.evo.genetic.GeneticCentroid;
  * Represents a centroid in k-means algorithm
  * @author jfk
  */
-public class Centroid extends Point implements GeneticCentroid {
+public class Centroid extends Point {
 
   private Set<Point> pointsInCluster = new HashSet<>();
   
@@ -25,15 +25,12 @@ public class Centroid extends Point implements GeneticCentroid {
   }
   
   public Set<Point> getPointsInCluster() {
-	  
-	  return pointsInCluster;
+    return pointsInCluster;
   }
   
   public void setPointsInCluster(Set<Point> _pointsInCluster) {
-	  
-	  this.pointsInCluster = _pointsInCluster;
+    this.pointsInCluster = _pointsInCluster;
   }
-  
   
   public Centroid findNewPosition(){
     Random generator = new Random();
