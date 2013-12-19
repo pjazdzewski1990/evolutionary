@@ -8,21 +8,21 @@ import pl.ug.edu.evo.kmeans.KMeans;
 
 public class Statistician {
 
-  static int MAX_ROUNDS = 3;
+  static int MAX_ROUNDS = 10;
   static int CLUSTER_NUM = 3;
 
   public static void main(String[] args) {
-    String[] dataSets = {"datasets/data_2_2.txt", "datasets/data_5_2.txt", "datasets/data_foo.txt"};
+    String[] dataSets = {"datasets/data_2_2.txt", "datasets/data_5_2.txt"};
     
     for(String dataSet : dataSets) {
-      testKmeans(dataSet);
+      List<Point> environment = Point.readPointsFromFile(dataSet); 
+      
+      System.out.println("KMEANS  SET: " + dataSet);
+      testAlgorithm(new KMeans(environment));
     }
   }
 
-  private static void testKmeans(String dataSet) {
-    List<Point> environment = Point.readPointsFromFile(dataSet);
-    IterativeAlgorithm alg = new KMeans(environment);
-    
+  private static void testAlgorithm(IterativeAlgorithm alg) {
     Date past = new Date();
     
     IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
@@ -39,6 +39,6 @@ public class Statistician {
     
     Date future = new Date();
     long time = future.getTime() - past.getTime();
-    System.out.println("KMEANS for " + dataSet + " -->> time:" + time + " best:" + best.score()+ " worst:" + worst.score() + " final:" + solution.score());
+    System.out.println("  time:" + time + " best:" + best.score()+ " worst:" + worst.score() + " final:" + solution.score());
   }
 }
