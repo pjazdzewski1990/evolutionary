@@ -29,8 +29,8 @@ public class Launcher {
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_foo.txt");
     
-    IterativeAlgorithm alg = new KMeans(environment);
-//    IterativeAlgorithm alg = new GeneticAlgorithm(environment);
+//    IterativeAlgorithm alg = new KMeans(environment);
+    IterativeAlgorithm alg = new GeneticAlgorithm(environment);
     IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
 
     for(int round=1; round<MAX_ROUNDS; round++){

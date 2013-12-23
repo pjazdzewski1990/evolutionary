@@ -93,7 +93,15 @@ public class Centroid extends Point {
     return initial;
   }
   
-  public static Centroid getNearestCentroid(List<Point> centroids, Point point) {
+  public static Centroid getNearestCentroid(List<Centroid> centroids, Point point) {
+    List<Point> centroidsAsPoints = new ArrayList<>(centroids.size());
+    for(Point centroid: centroids){
+      centroidsAsPoints.add(centroid);
+    }
+    return getNearestPoint(centroidsAsPoints, point);
+  }
+  
+  public static Centroid getNearestPoint(List<Point> centroids, Point point) {
     Point closestCentroid = null;
     Double minDistance = 0d;
     for(Point centroid: centroids){

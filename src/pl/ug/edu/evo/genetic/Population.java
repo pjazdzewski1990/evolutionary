@@ -29,7 +29,7 @@ public class Population implements IterationSolution {
     ConcurrentSkipListSet<GeneticClusteringSolution> population = new ConcurrentSkipListSet<>(solutions);
     //1. create descendents 
     for(GeneticClusteringSolution sol : solutions) {
-      population.add(sol.mutate(sol));
+      population.add(sol.mutate());
     }
     //2. group them
     Random r = new Random();
@@ -55,7 +55,7 @@ public class Population implements IterationSolution {
     return taken;
   }
 
-@Override
+  @Override
   public double score() {
     return solutions.first().score();
   }
@@ -63,5 +63,10 @@ public class Population implements IterationSolution {
   @Override
   public String asJValue() {
     return solutions.first().asJValue();
+  }
+  
+  @Override
+  public String toString() {
+    return "Population: " + solutions.size();
   }
 }

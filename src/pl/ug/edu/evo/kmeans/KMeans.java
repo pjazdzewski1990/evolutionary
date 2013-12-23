@@ -35,7 +35,7 @@ public class KMeans implements IterativeAlgorithm {
     }
     //add points to centroids
     for(Point point: environment){
-      Centroid closest = Centroid.getNearestCentroid(newSolution, point);
+      Centroid closest = Centroid.getNearestPoint(newSolution, point);
       closest.clusterPoint(point);
     }
     return new KMeansSolution(newSolution);
@@ -46,7 +46,7 @@ public class KMeans implements IterativeAlgorithm {
     List<Point> initial = Centroid.generateRandom(solutionsNum, dimensions, ranges);
     //add points to centroids
     for(Point point: environment){
-      Centroid closest = Centroid.getNearestCentroid(initial, point);
+      Centroid closest = Centroid.getNearestPoint(initial, point);
       closest.clusterPoint(point);
     }
     
