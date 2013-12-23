@@ -20,8 +20,6 @@ public class Centroid extends Point implements GeneticCentroid {
     super(_position);
   }
   
-
-  
   public void clusterPoint(Point p) {
     pointsInCluster.add(p);
   }
@@ -112,7 +110,6 @@ public class Centroid extends Point implements GeneticCentroid {
     return (Centroid)closestCentroid;
   }
 
-
 private List<Double> calculateBreedCoords(Point far) {
 	List<Double> coords = new ArrayList<Double>();
 	Random r = new Random(); 
@@ -130,11 +127,11 @@ private List<Double> calculateBreedCoords(Point far) {
 @Override
 public Centroid mutate() {
 	
-	// Tworzy nowe punkty centroidu, przesuwa o iloczyn random.gaussa razy wa¿ony sredni dystans pomiêdzy centroidem a najdalszym punktem
+	// Tworzy nowe punkty centroidu, przesuwa o iloczyn random.gaussa razy waï¿½ony sredni dystans pomiï¿½dzy centroidem a najdalszym punktem
 	
 	
 	//tl;dr 
-	// Kalkuluje nowy punkt pomiêdzy centoridem a najdalszym punktem i przemnza jego coordy przez random
+	// Kalkuluje nowy punkt pomiï¿½dzy centoridem a najdalszym punktem i przemnza jego coordy przez random
 	
 	//Point nearestPoint = null;
 	Point furthestPoint = null;

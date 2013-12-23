@@ -3,6 +3,7 @@ package pl.ug.edu.evo;
 import java.util.Date;
 import java.util.List;
 
+import pl.ug.edu.evo.genetic.GeneticAlgorithm;
 import pl.ug.edu.evo.grid.Point;
 import pl.ug.edu.evo.kmeans.KMeans;
 
@@ -17,8 +18,15 @@ public class Statistician {
     for(String dataSet : dataSets) {
       List<Point> environment = Point.readPointsFromFile(dataSet); 
       
-      System.out.println("KMEANS  SET: " + dataSet);
+      System.out.println("KMEANS  Set: " + dataSet);
       testAlgorithm(new KMeans(environment));
+    }
+    
+    for(String dataSet : dataSets) {
+      List<Point> environment = Point.readPointsFromFile(dataSet); 
+      
+      System.out.println("EVOLUTIONARY  Set: " + dataSet);
+      testAlgorithm(new GeneticAlgorithm(environment));
     }
   }
 
