@@ -31,7 +31,7 @@ public class Launcher {
     
 //    IterativeAlgorithm alg = new KMeans(environment);
     IterativeAlgorithm alg = new GeneticAlgorithm(environment);
-    IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
+    IterationSolution solution = alg.initialSolution(4);
 
     for(int round=1; round<MAX_ROUNDS; round++){
       jsonBuffer.add(solution.asJValue());

@@ -22,22 +22,29 @@ public class Population implements IterationSolution {
   private ConcurrentSkipListSet<GeneticClusteringSolution> solutions;
 
   public Population(List<GeneticClusteringSolution> _solutions) {
-    solutions = new ConcurrentSkipListSet<>(_solutions); 
+    solutions = new ConcurrentSkipListSet<>(); 
+    for(GeneticClusteringSolution gcs : _solutions) {
+     solutions.add(gcs);
+    }
   }
 
   public Population nextPopulation() {
     ConcurrentSkipListSet<GeneticClusteringSolution> population = new ConcurrentSkipListSet<>(solutions);
+    System.out.println("Before " + population.size());
     //1. create descendents 
     for(GeneticClusteringSolution sol : solutions) {
       population.add(sol.mutate());
     }
+    System.out.println("After " + population.size());
     //2. group them
     Random r = new Random();
-    int groupsCount = solutions.size() / 2;
+    int splitFactor = 2;
+    int groupsCount = population.size() / splitFactor;
     List<List<GeneticClusteringSolution>> groups = new ArrayList<>(groupsCount);
     for(int i=0; i<groupsCount; i++) groups.add(new ArrayList<GeneticClusteringSolution>());
     for(GeneticClusteringSolution gcs : population) {
       int index = r.nextInt(groupsCount);
+      while(groups.get(index).size() >= splitFactor) index = r.nextInt(groupsCount);
       groups.get(index).add(gcs);
     }
     //3. choose winners
@@ -52,6 +59,7 @@ public class Population implements IterationSolution {
   private List<GeneticClusteringSolution> getBestInGroup(List<GeneticClusteringSolution> group, int take) {
     Collections.sort(group);
     List<GeneticClusteringSolution> taken = new ArrayList<>();
+    for(int i=0; i<take; i++) taken.add(group.get(i));
     return taken;
   }
 
@@ -67,6 +75,6 @@ public class Population implements IterationSolution {
   
   @Override
   public String toString() {
-    return "Population: " + solutions.size();
+    return "Population[size:" + solutions.size() + "]";
   }
 }

@@ -50,7 +50,16 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     double score0 = this.score();
     double score1 = o.score();
 
-    return score0 < score1? 1 : 0;
+//    return score0 < score1? 1 : 0;
+    if(score0 != score1) {
+      return score0 < score1? 1 : -1;
+    } else {
+      if(centroids.equals(o.centroids)){
+        return 0;
+      } else {
+        return 1; //they both are as good, take any
+      }
+    }
   }
 
   public List<Centroid> getCentroids() {
