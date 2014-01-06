@@ -3,8 +3,8 @@ package pl.ug.edu.evo;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.ug.edu.evo.base.Point;
 import pl.ug.edu.evo.genetic.GeneticAlgorithm;
-import pl.ug.edu.evo.grid.Point;
 import pl.ug.edu.evo.kmeans.KMeans;
 
 /* Using data from http://www.isical.ac.in/~sanghami/data.html

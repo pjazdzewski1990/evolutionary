@@ -2,7 +2,7 @@ package pl.ug.edu.evo;
 
 import java.util.List;
 
-import pl.ug.edu.evo.grid.Centroid;
+import pl.ug.edu.evo.base.Centroid;
 
 public interface IterativeAlgorithm {
   /**

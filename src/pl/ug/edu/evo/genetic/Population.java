@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import pl.ug.edu.evo.IterationSolution;
-import pl.ug.edu.evo.grid.Centroid;
+import pl.ug.edu.evo.base.Centroid;
 
 /**
  * Obiekt zawierający wiele potencjalnych rozwiązań zadanego 

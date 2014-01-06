@@ -5,8 +5,8 @@ import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.IterativeAlgorithm;
-import pl.ug.edu.evo.grid.Centroid;
-import pl.ug.edu.evo.grid.Point;
+import pl.ug.edu.evo.base.Centroid;
+import pl.ug.edu.evo.base.Point;
 
 public class GeneticAlgorithm implements IterativeAlgorithm {
 
@@ -41,7 +41,7 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   }
 
   private GeneticClusteringSolution randomClusterSolution(int solutionsNum) {
-    List<Point> randomCentroids = Centroid.generateRandom(solutionsNum, dimensions, ranges);
+    List<Point> randomCentroids = GeneticCentroid.generateRandom(solutionsNum, dimensions, ranges);
     for(Point point: environment){
       Centroid closest = Centroid.getNearestPoint(randomCentroids, point);
       closest.clusterPoint(point);

@@ -8,8 +8,8 @@ import java.util.Random;
 
 import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.IterativeAlgorithm;
-import pl.ug.edu.evo.grid.Centroid;
-import pl.ug.edu.evo.grid.Point;
+import pl.ug.edu.evo.base.Centroid;
+import pl.ug.edu.evo.base.Point;
 
 public class KMeans implements IterativeAlgorithm {
 
@@ -30,12 +30,12 @@ public class KMeans implements IterativeAlgorithm {
     
     List<Point> newSolution = new ArrayList<>();
     for(Point point: points){
-      Centroid centroid = (Centroid)point;
+    KMeansCentroid centroid = new KMeansCentroid(point);
       newSolution.add(centroid.findNewPosition());
     }
     //add points to centroids
     for(Point point: environment){
-      Centroid closest = Centroid.getNearestPoint(newSolution, point);
+    	Centroid closest = Centroid.getNearestPoint(newSolution, point);
       closest.clusterPoint(point);
     }
     return new KMeansSolution(newSolution);
@@ -43,7 +43,7 @@ public class KMeans implements IterativeAlgorithm {
 
   @Override
   public IterationSolution initialSolution(int solutionsNum) {
-    List<Point> initial = Centroid.generateRandom(solutionsNum, dimensions, ranges);
+    List<Point> initial = KMeansCentroid.generateRandom(solutionsNum, dimensions, ranges);
     //add points to centroids
     for(Point point: environment){
       Centroid closest = Centroid.getNearestPoint(initial, point);

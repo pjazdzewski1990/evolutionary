@@ -3,8 +3,8 @@ package pl.ug.edu.evo;
 import java.util.Date;
 import java.util.List;
 
+import pl.ug.edu.evo.base.Point;
 import pl.ug.edu.evo.genetic.GeneticAlgorithm;
-import pl.ug.edu.evo.grid.Point;
 import pl.ug.edu.evo.kmeans.KMeans;
 
 public class Statistician {

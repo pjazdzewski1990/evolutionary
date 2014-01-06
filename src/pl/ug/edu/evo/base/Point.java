@@ -1,4 +1,4 @@
-package pl.ug.edu.evo.grid;
+package pl.ug.edu.evo.base;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -26,6 +26,9 @@ public class Point {
    * @param dimension
    * @return
    */
+  public Double getCoordinate(int i) {
+	  return position.get(i);
+  }
   public Double getCoordinate(Character dimension) {
     switch(Character.toUpperCase(dimension)){
       case 'X': return position.get(0);

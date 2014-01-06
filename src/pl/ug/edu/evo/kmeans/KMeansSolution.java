@@ -3,8 +3,8 @@ package pl.ug.edu.evo.kmeans;
 import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
-import pl.ug.edu.evo.grid.Centroid;
-import pl.ug.edu.evo.grid.Point;
+import pl.ug.edu.evo.base.Centroid;
+import pl.ug.edu.evo.base.Point;
 
 public class KMeansSolution implements IterationSolution {
 

@@ -8,8 +8,8 @@ import java.util.Random;
 import java.util.Set;
 
 import pl.ug.edu.evo.IterationSolution;
-import pl.ug.edu.evo.grid.Centroid;
-import pl.ug.edu.evo.grid.Point;
+import pl.ug.edu.evo.base.Centroid;
+import pl.ug.edu.evo.base.Point;
 
 /**
  * Reprezentuje pojedyncze rozwiÄ…zanie
@@ -97,25 +97,38 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
       if(r.nextBoolean()) choosenPoints.add(p);
     }
     
-    //TODO: only for 2D
-    double sumX = 0.0;
-    double sumY = 0.0;
-    //2. create a average point for "cluster mass"
-    for(Point choosen : choosenPoints){
-      sumX += choosen.getCoordinate('X');
-      sumY += choosen.getCoordinate('Y');
-    }
-    int massSize = choosenPoints.size();
-    double avgX = sumX/massSize;
-    double avgY = sumY/massSize;
     
+    //tutaj jeszcze troche nar¹bane, ale potem to poprawie
+    //TODO: only for 2D
+    Double[] sumAll = new Double[choosenPoints.get(0).getCoordinateList().size()];
+
+    //2. create a average point for "cluster mass"
+    if(choosenPoints.size()>0) {
+    	for(int i=0; i<choosenPoints.get(0).getCoordinateList().size(); i++) {
+    		sumAll[i] = 0.0;
+    	}
+    	
+    	
+    for(int j=0; j<choosenPoints.size(); j++) {
+    	
+    	for(int i=0; i<choosenPoints.get(0).getCoordinateList().size(); i++) {
+    		
+    		sumAll[i]+=choosenPoints.get(j).getCoordinate(i);
+    	}
+    }
+
+    int massSize = choosenPoints.size();
+    for(int i = 0; i<choosenPoints.get(0).getCoordinateList().size(); i++) {
+    	sumAll[i]= c.getCoordinate(i) + (sumAll[i]/massSize) / (r.nextInt(9)+1) ;
+    }
+
     //3. create a new cluster that is closer by a random factor to the average point
-    double newX = c.getCoordinate('X') + avgX/(r.nextInt(9)+1);
-    double newY = c.getCoordinate('X') + avgY/(r.nextInt(9)+1);
+
     
     
     //return the new cluster without points specified
-    return new Centroid(Arrays.asList(new Double[]{newX, newY}));
+    }
+    return new Centroid(Arrays.asList(sumAll));
   }
 
   private List<Point> getAllPointsFromClustes() {
