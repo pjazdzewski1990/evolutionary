@@ -24,7 +24,7 @@ public class Launcher {
   public static void main(String[] args) {
     List<String> jsonBuffer = new ArrayList<>();
     
-    int MAX_ROUNDS = 3;
+    int MAX_ROUNDS = 7;
     int CLUSTER_NUM = 3;
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_foo.txt");

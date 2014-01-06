@@ -30,12 +30,12 @@ public class Population implements IterationSolution {
 
   public Population nextPopulation() {
     ConcurrentSkipListSet<GeneticClusteringSolution> population = new ConcurrentSkipListSet<>(solutions);
-    System.out.println("Before " + population.size());
-    //1. create descendents 
+
+    //1. create descendents and add them to parents
     for(GeneticClusteringSolution sol : solutions) {
       population.add(sol.mutate());
     }
-    System.out.println("After " + population.size());
+
     //2. group them
     Random r = new Random();
     int splitFactor = 2;
