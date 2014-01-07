@@ -1,5 +1,6 @@
 package pl.ug.edu.evo.kmeans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
@@ -8,11 +9,12 @@ import pl.ug.edu.evo.base.Point;
 
 public class KMeansSolution implements IterationSolution {
 
-  private List<Point> points;
-  public  List<Centroid> centroids;
+  private List<Centroid> points;
 
-  public KMeansSolution(List<Point> _points) {
-    points = _points;
+
+  public KMeansSolution(List<Centroid> _points) {
+	  points=_points;
+    
   }
 
   @Override
@@ -44,10 +46,12 @@ public class KMeansSolution implements IterationSolution {
     sb.append("]");
     return sb.toString();
   }
-
-  public List<Point> asPoints() {
-    return points;
+  
+  public List<Centroid> getPoints() {
+   return points;
   }
+  
+
   
   @Override
   public String toString() {

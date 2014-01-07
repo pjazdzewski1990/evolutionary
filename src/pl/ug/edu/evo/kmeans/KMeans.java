@@ -27,41 +27,42 @@ public class KMeans implements IterativeAlgorithm {
   @Override
   public IterationSolution nextRound(IterationSolution previousStep) {
     //TODO: what a shitty solution. I don't like this cast and the idea that sending other subtype of IterationSolution will blow the system up 
-    List<Point> points = ((KMeansSolution)previousStep).asPoints();
-    
-    
-    List<Point> newSolution = new ArrayList<>();
-    for(Point point: points){
+    List<Centroid> points = ((KMeansSolution)previousStep).getPoints();
+    System.out.println("------------------");
+    System.out.println(points);
+    System.out.println("------------------");
+    List<Centroid> newSolution = new ArrayList<>();
+    for(Centroid point: points){
+    	 
+    	  
     KMeansCentroid centroid = new KMeansCentroid(point);
+   centroid.setPointsInCluster(point.getPointsInCluster());
       newSolution.add(centroid.findNewPosition());
+      System.out.println("------------------");
     }
-    
+   
 
-    //add points to centroids
-
-    for(Point point: environment){
-    	System.out.println(point);
-    	
-    	Centroid closest = Centroid.getNearestPoint(newSolution, point);
-      closest.clusterPoint(point);
-
-    }
-
+    attachToCentroids(newSolution);
     
     return new KMeansSolution(newSolution);
   }
 
   @Override
   public IterationSolution initialSolution(int solutionsNum) {
-    List<Point> initial = KMeansCentroid.generateRandom(solutionsNum, dimensions, ranges);
-    //add points to centroids
-   
+    List<Centroid> initial = KMeansCentroid.generateRandom(solutionsNum, dimensions, ranges);
 
-    for(Point point: environment){
-      Centroid closest = Centroid.getNearestPoint(initial, point);
-      closest.clusterPoint(point);
-    }
+    attachToCentroids(initial);
 
+  
     return new KMeansSolution(initial);
+  }
+  
+  private void attachToCentroids(List<Centroid> initial) {
+	  
+	  for(Point point: environment){
+	      Centroid closest = Centroid.getNearestPoint(initial, point);
+	      closest.clusterPoint(point);
+	    }
+	  
   }
 }

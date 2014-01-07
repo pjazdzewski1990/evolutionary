@@ -69,11 +69,11 @@ public class Centroid extends Point{
     return sb.toString();
   }
   
-  public static List<Point> generateRandom(int solutionsNum, int dimensions, List<Double> ranges){
+  public static List<Centroid> generateRandom(int solutionsNum, int dimensions, List<Double> ranges){
 	 Centroid._dims = dimensions;
 	 Centroid._ranges = ranges;
     Random generator = new Random();
-    List<Point> initial = new ArrayList<>();
+    List<Centroid> initial = new ArrayList<>();
     
     for(int i=0; i<solutionsNum; i++){
      
@@ -95,7 +95,7 @@ public class Centroid extends Point{
   
  
   
-  public static Centroid getNearestPoint(List<Point> centroids, Point point) {
+  public static Centroid getNearestPoint(List<Centroid> centroids, Point point) {
     Point closestCentroid = null;
     Double minDistance = 0d;
     for(Point centroid: centroids){
@@ -110,8 +110,8 @@ public class Centroid extends Point{
   }
   
   public static Centroid getNearestCentroid(List<Centroid> centroids, Point point) {
-	    List<Point> centroidsAsPoints = new ArrayList<>(centroids.size());
-	    for(Point centroid: centroids){
+	    List<Centroid> centroidsAsPoints = new ArrayList<>(centroids.size());
+	    for(Centroid centroid: centroids){
 	      centroidsAsPoints.add(centroid);
 	    }
 	    return getNearestPoint(centroidsAsPoints, point);
