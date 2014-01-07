@@ -14,6 +14,7 @@ import pl.ug.edu.evo.base.Point;
 public class KMeans implements IterativeAlgorithm {
 
   List<Point> environment = new ArrayList<>();
+
   List<Double> ranges;
   int dimensions;
 
@@ -28,15 +29,22 @@ public class KMeans implements IterativeAlgorithm {
     //TODO: what a shitty solution. I don't like this cast and the idea that sending other subtype of IterationSolution will blow the system up 
     List<Point> points = ((KMeansSolution)previousStep).asPoints();
     
+    
     List<Point> newSolution = new ArrayList<>();
     for(Point point: points){
     KMeansCentroid centroid = new KMeansCentroid(point);
-      //newSolution.add(centroid.findNewPosition());
+      newSolution.add(centroid.findNewPosition());
     }
+    
+
     //add points to centroids
+
     for(Point point: environment){
+    	System.out.println(point);
+    	
     	Centroid closest = Centroid.getNearestPoint(newSolution, point);
       closest.clusterPoint(point);
+
     }
 
     
@@ -47,11 +55,13 @@ public class KMeans implements IterativeAlgorithm {
   public IterationSolution initialSolution(int solutionsNum) {
     List<Point> initial = KMeansCentroid.generateRandom(solutionsNum, dimensions, ranges);
     //add points to centroids
+   
+
     for(Point point: environment){
       Centroid closest = Centroid.getNearestPoint(initial, point);
       closest.clusterPoint(point);
     }
-   
+
     return new KMeansSolution(initial);
   }
 }

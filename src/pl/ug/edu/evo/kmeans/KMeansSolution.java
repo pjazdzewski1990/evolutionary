@@ -9,6 +9,7 @@ import pl.ug.edu.evo.base.Point;
 public class KMeansSolution implements IterationSolution {
 
   private List<Point> points;
+  public  List<Centroid> centroids;
 
   public KMeansSolution(List<Point> _points) {
     points = _points;
