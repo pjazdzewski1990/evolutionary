@@ -16,6 +16,8 @@ import pl.ug.edu.evo.kmeans.KMeansCentroid;
 public class Centroid extends Point{
 
   protected Set<Point> pointsInCluster = new HashSet<>();
+  public static int _dims = 2;
+  public static List<Double> _ranges = new ArrayList<Double>();
   
   public Centroid(List<Double> _position) {
     super(_position);
@@ -47,6 +49,8 @@ public class Centroid extends Point{
       double sum = 0;
       Point center = this;
       for(Point p: pointsInCluster) {
+    	  //System.out.println("-------------");
+    	 // System.out.println(center);
         sum += Point.distance(p, center);
       }
       return sum;
@@ -66,19 +70,27 @@ public class Centroid extends Point{
   }
   
   public static List<Point> generateRandom(int solutionsNum, int dimensions, List<Double> ranges){
+	 Centroid._dims = dimensions;
+	 Centroid._ranges = ranges;
     Random generator = new Random();
     List<Point> initial = new ArrayList<>();
     
     for(int i=0; i<solutionsNum; i++){
-      List<Double> center = new ArrayList<>();
-      for(int j=0; j<dimensions; j++){
-        double range = ranges.get(j);
-        double randomPoint = (generator.nextDouble() * 2 * range) - range;
-        center.add(randomPoint);
-      }
-      initial.add(new Centroid(center));
+     
+      initial.add(new Centroid(randomCentroid(dimensions, ranges)));
     }
     return initial;
+  }
+  
+  public static Centroid randomCentroid(int dimensions, List<Double> ranges) {
+	  Random generator = new Random();
+	  List<Double> center = new ArrayList<>();
+	  for(int j=0; j<dimensions; j++){
+	        double range = ranges.get(j);
+	        double randomPoint = (generator.nextDouble() * 2 * range) - range;
+	        center.add(randomPoint);
+	      }
+	  return new Centroid(center);
   }
   
  

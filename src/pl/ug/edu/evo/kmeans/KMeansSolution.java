@@ -20,6 +20,7 @@ public class KMeansSolution implements IterationSolution {
     for(Point p : points) {
       if(p instanceof Centroid) {
         Centroid c = (Centroid)p;
+        
         double partialResult = c.calculateClusterInternalDistance();
         if(partialResult == Double.MAX_VALUE){
           score = Double.MAX_VALUE;

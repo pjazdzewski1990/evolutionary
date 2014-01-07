@@ -74,14 +74,27 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     //1. perform gravity mutation
     List<Centroid> mutatedCentroids = new ArrayList<>();
     for(Centroid c : centroids){
-      mutatedCentroids.add(gravitate(c));
+    	//System.out.println(c);
+    	Centroid g;
+    	if(c.getPointsInCluster().size()>0) {
+    		g = gravitate(c);
+    	} else {
+    		g = Centroid.randomCentroid(Centroid._dims, Centroid._ranges);
+    	}
+      mutatedCentroids.add(g);
+    	
+    	//System.out.println(g);
     }
 
     //2. re-assign points to centroids
     List<Point> allPointsInSolution = getAllPointsFromClustes();
+
+
     for(Point point : allPointsInSolution){
       Centroid closest = Centroid.getNearestCentroid(mutatedCentroids, point);
       closest.clusterPoint(point);
+
+      
     }
 
     return new GeneticClusteringSolution(mutatedCentroids);
@@ -89,27 +102,28 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
 
   private Centroid gravitate(Centroid c) {
     Random r = new Random();
-    Double[] sumAll = {0.0};
+    Double[] sumAll = new Double[Centroid._dims];
+
+    
     Set<Point> pointsInCentroid = c.getPointsInCluster();
-    System.out.println("_-_______");
-    System.out.println("_-_______");
-    System.out.println(c.getPointsInCluster());
-    System.out.println("_-_______");
+
     //1. choose the points to form the "cluster mass", on average 50% of all
     List<Point> choosenPoints = new ArrayList<>();
     for(Point p : pointsInCentroid) {
       if(r.nextBoolean()) choosenPoints.add(p);
-      
-      
-      
+
       
     }
-    System.out.println(choosenPoints);
+    for(int i=0; i<Centroid._dims; i++) {
+		sumAll[i] = 0.0;
+	}
+
     
     //tutaj jeszcze troche nar¹bane, ale potem to poprawie
     //TODO: only for 2D
     if(choosenPoints.size()>0) {
-    sumAll = new Double[choosenPoints.get(0).getCoordinateList().size()];
+
+
 
     //2. create a average point for "cluster mass"
     

@@ -27,11 +27,11 @@ public class Launcher {
     int MAX_ROUNDS = 7;
     int CLUSTER_NUM = 3;
     
-    List<Point> environment = Point.readPointsFromFile("datasets/data_foo.txt");
+    List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
     
-//    IterativeAlgorithm alg = new KMeans(environment);
-    IterativeAlgorithm alg = new GeneticAlgorithm(environment);
-    IterationSolution solution = alg.initialSolution(4);
+    IterativeAlgorithm alg = new KMeans(environment);
+   // IterativeAlgorithm alg = new GeneticAlgorithm(environment);
+    IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
 
     for(int round=1; round<MAX_ROUNDS; round++){
       jsonBuffer.add(solution.asJValue());

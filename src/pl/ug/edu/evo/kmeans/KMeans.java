@@ -31,13 +31,15 @@ public class KMeans implements IterativeAlgorithm {
     List<Point> newSolution = new ArrayList<>();
     for(Point point: points){
     KMeansCentroid centroid = new KMeansCentroid(point);
-      newSolution.add(centroid.findNewPosition());
+      //newSolution.add(centroid.findNewPosition());
     }
     //add points to centroids
     for(Point point: environment){
     	Centroid closest = Centroid.getNearestPoint(newSolution, point);
       closest.clusterPoint(point);
     }
+
+    
     return new KMeansSolution(newSolution);
   }
 
@@ -49,7 +51,7 @@ public class KMeans implements IterativeAlgorithm {
       Centroid closest = Centroid.getNearestPoint(initial, point);
       closest.clusterPoint(point);
     }
-    
+   
     return new KMeansSolution(initial);
   }
 }
