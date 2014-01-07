@@ -28,9 +28,7 @@ public class KMeans implements IterativeAlgorithm {
   public IterationSolution nextRound(IterationSolution previousStep) {
     //TODO: what a shitty solution. I don't like this cast and the idea that sending other subtype of IterationSolution will blow the system up 
     List<Centroid> points = ((KMeansSolution)previousStep).getPoints();
-    System.out.println("------------------");
-    System.out.println(points);
-    System.out.println("------------------");
+
     List<Centroid> newSolution = new ArrayList<>();
     for(Centroid point: points){
     	 
@@ -38,7 +36,7 @@ public class KMeans implements IterativeAlgorithm {
     KMeansCentroid centroid = new KMeansCentroid(point);
    centroid.setPointsInCluster(point.getPointsInCluster());
       newSolution.add(centroid.findNewPosition());
-      System.out.println("------------------");
+
     }
    
 

@@ -41,12 +41,12 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   }
 
   private GeneticClusteringSolution randomClusterSolution(int solutionsNum) {
-    List<Point> randomCentroids = GeneticCentroid.generateRandom(solutionsNum, dimensions, ranges);
+    List<Centroid> randomCentroids = GeneticCentroid.generateRandom(solutionsNum, dimensions, ranges);
     for(Point point: environment){
       Centroid closest = Centroid.getNearestPoint(randomCentroids, point);
       closest.clusterPoint(point);
     }
-    return new GeneticClusteringSolution(cast(randomCentroids)); 
+    return new GeneticClusteringSolution(randomCentroids); 
   }
   
   //TODO: fix the Point <-> Centroid conversions !!!!!!!!
