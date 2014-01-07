@@ -89,21 +89,30 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
 
   private Centroid gravitate(Centroid c) {
     Random r = new Random();
+    Double[] sumAll = {0.0};
     Set<Point> pointsInCentroid = c.getPointsInCluster();
-    
+    System.out.println("_-_______");
+    System.out.println("_-_______");
+    System.out.println(c.getPointsInCluster());
+    System.out.println("_-_______");
     //1. choose the points to form the "cluster mass", on average 50% of all
     List<Point> choosenPoints = new ArrayList<>();
     for(Point p : pointsInCentroid) {
       if(r.nextBoolean()) choosenPoints.add(p);
+      
+      
+      
+      
     }
-    
+    System.out.println(choosenPoints);
     
     //tutaj jeszcze troche nar¹bane, ale potem to poprawie
     //TODO: only for 2D
-    Double[] sumAll = new Double[choosenPoints.get(0).getCoordinateList().size()];
+    if(choosenPoints.size()>0) {
+    sumAll = new Double[choosenPoints.get(0).getCoordinateList().size()];
 
     //2. create a average point for "cluster mass"
-    if(choosenPoints.size()>0) {
+    
     	for(int i=0; i<choosenPoints.get(0).getCoordinateList().size(); i++) {
     		sumAll[i] = 0.0;
     	}
