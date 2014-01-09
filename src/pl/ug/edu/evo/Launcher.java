@@ -34,11 +34,12 @@ public class Launcher {
     IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
 
     for(int round=1; round<MAX_ROUNDS; round++){
+      System.out.println(round + " " + solution.score() + " " + solution.asJValue());
       jsonBuffer.add(solution.asJValue());
       solution = alg.nextRound(solution);
     }
     
-    System.out.println(historyAsJson(environment, jsonBuffer));
+    System.out.println("\n" + historyAsJson(environment, jsonBuffer));
   }
 
   private static String historyAsJson(List<Point> environment, List<String> jsonBuffer) {

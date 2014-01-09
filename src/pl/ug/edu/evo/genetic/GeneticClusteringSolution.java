@@ -52,7 +52,7 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
 
 //    return score0 < score1? 1 : 0;
     if(score0 != score1) {
-      return score0 < score1? 1 : -1;
+      return score0 >= score1? 1 : -1;
     } else {
       if(centroids.equals(o.centroids)){
         return 0;
@@ -119,7 +119,7 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
 	}
 
     
-    //tutaj jeszcze troche nar¹bane, ale potem to poprawie
+    //tutaj jeszcze troche narï¿½bane, ale potem to poprawie
     //TODO: only for 2D
     if(choosenPoints.size()>0) {
 
