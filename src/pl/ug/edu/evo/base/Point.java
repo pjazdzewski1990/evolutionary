@@ -85,6 +85,7 @@ public class Point {
     for(String strPos: strings){
       pos.add(Double.parseDouble(strPos));
     }
+    pos.remove(pos.size()-1);//the last one is the choosen cluster
     return new Point(pos);
   }
   

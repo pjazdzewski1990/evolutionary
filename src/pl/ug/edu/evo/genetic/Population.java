@@ -21,7 +21,7 @@ public class Population implements IterationSolution {
 
   private ConcurrentSkipListSet<GeneticClusteringSolution> solutions;
 
-  public Population(List<GeneticClusteringSolution> _solutions) {
+public Population(List<GeneticClusteringSolution> _solutions) {
     solutions = new ConcurrentSkipListSet<>(); 
     for(GeneticClusteringSolution gcs : _solutions) {
      solutions.add(gcs);
@@ -76,5 +76,9 @@ public class Population implements IterationSolution {
   @Override
   public String toString() {
     return "Population[size:" + solutions.size() + "]";
+  }
+  
+  public ConcurrentSkipListSet<GeneticClusteringSolution> getSolutions() {
+    return solutions;
   }
 }
