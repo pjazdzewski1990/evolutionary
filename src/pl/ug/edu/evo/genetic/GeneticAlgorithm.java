@@ -7,6 +7,7 @@ import pl.ug.edu.evo.IterationSolution;
 import pl.ug.edu.evo.IterativeAlgorithm;
 import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
+import pl.ug.edu.evo.differential.DifferentialPopulation;
 
 public class GeneticAlgorithm implements IterativeAlgorithm {
 
@@ -23,12 +24,17 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   @Override
   public IterationSolution nextRound(IterationSolution previousPopulation) {
     //selection, mutation, breeding comes here
+    if(previousPopulation instanceof DifferentialPopulation) {
+    	System.out.println("DIFF");
+      DifferentialPopulation pop = (DifferentialPopulation)previousPopulation;
+      return pop.nextPopulation();
+    }
     if(previousPopulation instanceof Population) {
       Population pop = (Population)previousPopulation;
       return pop.nextPopulation();
-    }else{
-      return previousPopulation;
     }
+    
+    return previousPopulation;
   }
 
   @Override
@@ -40,23 +46,12 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
     return new Population(random);
   }
 
-  private GeneticClusteringSolution randomClusterSolution(int solutionsNum) {
+  protected GeneticClusteringSolution randomClusterSolution(int solutionsNum) {
     List<Centroid> randomCentroids = GeneticCentroid.generateRandom(solutionsNum, dimensions, ranges);
     for(Point point: environment){
       Centroid closest = Centroid.getNearestPoint(randomCentroids, point);
       closest.clusterPoint(point);
     }
     return new GeneticClusteringSolution(randomCentroids); 
-  }
-  
-  //TODO: fix the Point <-> Centroid conversions !!!!!!!!
-  private List<Centroid> cast(List<Point> points){
-    List<Centroid> centers = new ArrayList<>();
-    for(Point p : points){
-      if(p instanceof Centroid){
-        centers.add((Centroid)p);
-      }
-    }
-    return centers;
   }
 }

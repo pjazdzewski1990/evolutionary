@@ -23,21 +23,22 @@ import pl.ug.edu.evo.kmeans.KMeansSolution;
 
 public class Statistician {
 
-  static int MAX_ROUNDS = 10;
+  static int MAX_ROUNDS = 540;
   static int CLUSTER_NUM = 5;
 
   public static void main(String[] args) {
     String[] dataSets = {"datasets/data_5_2.txt"};
     
-    for(String dataSet : dataSets) {
-      List<Point> environment = Point.readPointsFromFile(dataSet); 
-      
-      System.out.println("KMEANS  Set: " + dataSet);
-      KMeansSolution finalResult = (KMeansSolution)testAlgorithm(new KMeans(environment));
-      
-      countCorrectnes(finalResult.getPoints(), dataSet);
-    }
+//    for(String dataSet : dataSets) {
+//      List<Point> environment = Point.readPointsFromFile(dataSet); 
+//      
+//      System.out.println("KMEANS  Set: " + dataSet);
+//      KMeansSolution finalResult = (KMeansSolution)testAlgorithm(new KMeans(environment));
+//      
+//      countCorrectnes(finalResult.getPoints(), dataSet);
+//    }
     
+    for(int ff=0; ff<10; ff++){
     for(String dataSet : dataSets) {
       List<Point> environment = Point.readPointsFromFile(dataSet); 
       
@@ -46,6 +47,7 @@ public class Statistician {
       GeneticClusteringSolution finalResult = pop.getSolutions().first();
       
       countCorrectnes(finalResult.getCentroids(), dataSet);
+    }
     }
   }
 
@@ -74,7 +76,7 @@ public class Statistician {
   private static void countCorrectnes(List<Centroid> centroids, String path) {
     List<Double[]> pointsData = parseDatasetFile(path);
     
-    System.out.println("PointsData gathered " + pointsData.size());
+//    System.out.println("PointsData gathered " + pointsData.size());
     
     int maxFit = 0;
     int centroidsSize = centroids.size();

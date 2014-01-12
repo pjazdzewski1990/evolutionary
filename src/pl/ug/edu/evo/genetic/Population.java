@@ -19,9 +19,9 @@ import pl.ug.edu.evo.base.Centroid;
  */
 public class Population implements IterationSolution {
 
-  private ConcurrentSkipListSet<GeneticClusteringSolution> solutions;
+  protected ConcurrentSkipListSet<GeneticClusteringSolution> solutions;
 
-public Population(List<GeneticClusteringSolution> _solutions) {
+  public Population(List<GeneticClusteringSolution> _solutions) {
     solutions = new ConcurrentSkipListSet<>(); 
     for(GeneticClusteringSolution gcs : _solutions) {
      solutions.add(gcs);
@@ -31,7 +31,7 @@ public Population(List<GeneticClusteringSolution> _solutions) {
   public Population nextPopulation() {
     ConcurrentSkipListSet<GeneticClusteringSolution> population = new ConcurrentSkipListSet<>(solutions);
 
-    //1. create descendents and add them to parents
+    //1. create descendants and add them to parents
     for(GeneticClusteringSolution sol : solutions) {
       population.add(sol.mutate());
     }

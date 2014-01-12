@@ -114,19 +114,47 @@ public class Centroid extends Point{
   }
   
   public static Centroid getNearestCentroid(List<Centroid> centroids, Point point) {
-	    List<Centroid> centroidsAsPoints = new ArrayList<>(centroids.size());
-	    for(Centroid centroid: centroids){
-	      centroidsAsPoints.add(centroid);
-	    }
-	    return getNearestPoint(centroidsAsPoints, point);
+    List<Centroid> centroidsAsPoints = new ArrayList<>(centroids.size());
+    for(Centroid centroid: centroids){
+      centroidsAsPoints.add(centroid);
+    }
+    return getNearestPoint(centroidsAsPoints, point);
   }
-
-
   
+  public Centroid minus(Centroid centroid) {
+    List<Double> result = new ArrayList<>();
 
+    List<Double> positionsA = this.getCoordinateList();
+    List<Double> positionsB = centroid.getCoordinateList();
+    for(int i=0; i<positionsA.size(); i++){
+      result.add(positionsA.get(i) - positionsB.get(i));
+    }
+    return new Centroid(result);
+  }
+  
+  public Centroid times(double factor) {
+    List<Double> result = new ArrayList<>();
 
-
-
-
-
+    List<Double> positionsA = this.getCoordinateList();
+    for(int i=0; i<positionsA.size(); i++){
+      result.add(positionsA.get(i) * factor);
+    }
+    return new Centroid(result);
+  }
+  public static Centroid randomlyCombine(Centroid centroidA, Centroid centroidB) {
+    Random rand = new Random();
+    
+    List<Double> pointsFromA = centroidA.getCoordinateList();
+    List<Double> pointsFromB = centroidB.getCoordinateList();
+    
+    List<Double> resultPosition = new ArrayList<>();
+    for(int i=0; i<pointsFromA.size();i++){
+      if(rand.nextBoolean()){
+        resultPosition.add(pointsFromA.get(i));
+      }else{
+        resultPosition.add(pointsFromB.get(i));
+      }
+    }
+    return new Centroid(resultPosition);
+  }
 }

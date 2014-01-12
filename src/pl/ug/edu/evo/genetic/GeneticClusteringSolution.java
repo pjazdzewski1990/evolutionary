@@ -161,4 +161,20 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     }
     return all;
   }
+
+  public static GeneticClusteringSolution randomlyCombine(
+    GeneticClusteringSolution instanceA,
+    GeneticClusteringSolution instanceB) {
+
+    Random rand = new Random();
+    List<Centroid> centroidsFromA = instanceA.getCentroids();
+    List<Centroid> centroidsFromB = instanceB.getCentroids();
+    
+    List<Centroid> result = new ArrayList<>();
+    for(int i=0; i<centroidsFromA.size(); i++){
+      result.add(Centroid.randomlyCombine(centroidsFromA.get(i), centroidsFromB.get(i)));
+    }
+    
+    return new GeneticClusteringSolution(result);
+  }
 }
