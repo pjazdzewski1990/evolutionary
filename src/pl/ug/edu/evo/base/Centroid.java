@@ -26,6 +26,11 @@ public class Centroid extends Point{
 	  super(pt.getCoordinateList());
   }
   
+  public void flushCluster() {
+	  pointsInCluster = null;
+	  pointsInCluster = new HashSet<>();
+  }
+  
   public void clusterPoint(Point p) {
     pointsInCluster.add(p);
   }
@@ -54,7 +59,7 @@ public class Centroid extends Point{
       }
       return sum;
     }else{
-      return 0;
+      return Double.MAX_VALUE;
     }
   }
   

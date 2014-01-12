@@ -106,7 +106,7 @@ public class Point {
         }
       }
     }
-
+    Centroid._ranges = envRanges;
     return envRanges;
   }
   

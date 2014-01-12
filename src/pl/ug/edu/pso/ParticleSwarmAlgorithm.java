@@ -39,9 +39,7 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 	@Override
 	public IterationSolution initialSolution(int solutionsNum) {
 		// TODO Auto-generated method stub
-		
-		//JAK TO PODZIELIÆ??????
-		//nie teges z nadawaniem podleg³ych punktów po zmianach pozycji centroidów
+
 		
 		swarms = new ArrayList<ParticleSwarm>();
 		solutions = new ArrayList<ParticleSwarmSolution>();
@@ -56,9 +54,25 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 				solutions.get(i).centroids.add(swarms.get(j).particles.get(i));
 			}
 		}
-
+			Double best = 0.0;
+			for(int j=0; j<2; j++) {
+				for(ParticleSwarm swarm : swarms) {
+					swarm.randomizeSpeeds();
+					swarm.recountVelocity();
+					
+				}
+				rearrangeCluster();
+				for(ParticleSwarmSolution ps : solutions) {
+					if(ps.score()>best) {
+						best = ps.score();
+					}
+					if(ps.score()==3) {
+						//System.out.println(ps.asJValue());
+					}
+				}
+			}
 			
-			rearrangeCluster();
+			
 			
 		    
 		   return null; 

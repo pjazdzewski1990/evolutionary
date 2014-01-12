@@ -12,14 +12,14 @@ import pl.ug.edu.evo.base.Point;
 public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	
 	
-	public static int SWARM_SIZE = 30;
+	public static int SWARM_SIZE = 1;
 	
 	
 	List<Particle> particles;
 	List<Double> speedVector;
 	
 	
-	
+	Boolean gbest_unset = true;
 	Point g; //best position of all particles in swarm
 	Double gbest = Double.MAX_VALUE; // best fitness
 	
@@ -35,7 +35,7 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	
 
 	
-	private void randomizePositions() {
+	public void randomizePositions() {
 		particles = new ArrayList<Particle>(SWARM_SIZE);
 	
 		for(int i=0; i<SWARM_SIZE; i++) {
@@ -44,7 +44,7 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 		}
 	}
 	
-	private void randomizeSpeeds() {
+	public void randomizeSpeeds() {
 		speedVector = new ArrayList<Double>();
 		Random rand = new Random();
 		for(int i=0; i<Centroid._dims; i++) {
@@ -58,7 +58,7 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 		
 		
 		for(Particle pr : particles) {
-			
+
 			pr.recountFitness();
 			
 		}
@@ -88,6 +88,7 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 
 	@Override
 	public void setBestFitness(Double val) {
+		gbest_unset = false;
 		this.gbest = val;
 		
 	}
@@ -111,6 +112,11 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	public String asJValue() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Boolean best_unset() {
+		return gbest_unset;
 	}
 	
 }

@@ -17,6 +17,9 @@ public class ParticleSwarmSolution implements IterationSolution{
 	}
 	
 	public void rearrangeCluster(List<Point> points) {
+		for(Particle pt : centroids) {
+			pt.flushCluster();
+		}
 		for(Point point: points){
 			 Particle closest = Particle.getNearest(centroids, point);
 		      closest.clusterPoint(point);
@@ -25,8 +28,14 @@ public class ParticleSwarmSolution implements IterationSolution{
 
 	@Override
 	public double score() {
-		// TODO Auto-generated method stub
-		return 0;
+		double score = 0;
+		
+		for(Particle pt : centroids) {
+			if(pt.getPointsInCluster().size()>0) {
+				score+=1;
+			}
+		}
+		return score;
 	}
 
 	@Override

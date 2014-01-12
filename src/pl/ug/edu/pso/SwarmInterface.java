@@ -10,5 +10,6 @@ public interface SwarmInterface {
 	public List<Double> getNewSpeedVector();
 	public void setBestFitness(Double val);
 	public void setBestPoint(Point pt);
+	public Boolean best_unset();
 	
 }
