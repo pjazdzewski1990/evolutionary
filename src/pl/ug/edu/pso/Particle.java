@@ -2,6 +2,7 @@ package pl.ug.edu.pso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
@@ -11,7 +12,7 @@ public class Particle extends Centroid {
 	
 	private List<Double> speed;
 	private SwarmInterface swarm;
-	private Double pbest; //best known fitness of current particle
+	private Double pbest = Double.MAX_VALUE; //best known fitness of current particle
 	private Point p; // best known position of current particle
 	public Particle(List<Double> _position, SwarmInterface _swarm) {
 		super(_position);												
@@ -20,7 +21,11 @@ public class Particle extends Centroid {
 	}
 	
 	public void arrangeRandomSpeeds() {
-		this.speed = new ArrayList<Double>(_dims);
+		this.speed = new ArrayList<Double>();
+		Random rand = new Random();
+		for (int i=0; i<_dims; i++) {
+			speed.add(rand.nextDouble());
+		} 
 	}
 	
 	public void refreshSpeed() {
@@ -28,7 +33,6 @@ public class Particle extends Centroid {
 		List<Double> coords = getCoordinateList();
 
 		for (int i=0; i<coords.size(); i++) {
-			
 			speed.set(i, speed.get(i) + swarm.getNewSpeedVector().get(i)*(p.getCoordinate(i) - getCoordinate(i)) + swarm.getNewSpeedVector().get(i) *(swarm.getBestPoint().getCoordinate(i) - getCoordinate(i)));
 			
 			coords.set(i, coords.get(i) + speed.get(i));
@@ -46,13 +50,24 @@ public class Particle extends Centroid {
 	public void recountFitness() {
 		
 		Double fit = calculateClusterInternalDistance();
-		if(fit < pbest) {
+		if(pbest == Double.MAX_VALUE)  {
 			pbest = fit;
 			p = new Point(this.getCoordinateList());
-		}
-		if(fit < swarm.getBestFitness()) {
-			swarm.setBestFitness(fit);
-			swarm.setBestPoint(new Point(this.getCoordinateList()));
+			if(swarm.getBestFitness() == Double.MAX_VALUE) {
+				swarm.setBestFitness(fit);
+				swarm.setBestPoint(new Point(this.getCoordinateList()));
+				
+			}
+		} else {
+
+			if(fit < pbest) {
+				pbest = fit;
+				p = new Point(this.getCoordinateList());
+			}
+			if(fit < swarm.getBestFitness()) {
+				swarm.setBestFitness(fit);
+				swarm.setBestPoint(new Point(this.getCoordinateList()));
+			}
 		}
 		
 	}

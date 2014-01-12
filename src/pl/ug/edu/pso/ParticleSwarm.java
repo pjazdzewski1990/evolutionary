@@ -21,7 +21,7 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	
 	
 	Point g; //best position of all particles in swarm
-	Double gbest; // best fitness
+	Double gbest = Double.MAX_VALUE; // best fitness
 	
 	public ParticleSwarm() {
 		initialSetup();
@@ -29,19 +29,18 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	
 	public void initialSetup() {
 		randomizePositions();
-		
 
-		
 		randomizeSpeeds();
 	}
 	
 
 	
 	private void randomizePositions() {
-		particles = new ArrayList<Particle>(ParticleSwarmSolution._dims);
+		particles = new ArrayList<Particle>(SWARM_SIZE);
 	
-		for(int i=0; i<ParticleSwarmSolution._dims; i++) {
-			particles.add(Particle.randomParticle(this,ParticleSwarmSolution._dims, ParticleSwarmSolution._ranges));
+		for(int i=0; i<SWARM_SIZE; i++) {
+			particles.add(Particle.randomParticle(this,ParticleSwarmAlgorithm._dims, ParticleSwarmAlgorithm._ranges));
+			particles.get(i).arrangeRandomSpeeds();
 		}
 	}
 	
@@ -51,6 +50,8 @@ public class ParticleSwarm implements SwarmInterface, IterationSolution{
 		for(int i=0; i<Centroid._dims; i++) {
 			speedVector.add(rand.nextDouble());			
 		}
+		
+		
 	}
 	
 	public void recountVelocity() {

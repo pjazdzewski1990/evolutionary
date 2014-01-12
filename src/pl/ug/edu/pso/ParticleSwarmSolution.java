@@ -4,65 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
-import pl.ug.edu.evo.IterativeAlgorithm;
-import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
-import pl.ug.edu.evo.genetic.GeneticCentroid;
-import pl.ug.edu.evo.genetic.GeneticClusteringSolution;
 
-public class ParticleSwarmSolution implements IterativeAlgorithm{
-
+public class ParticleSwarmSolution implements IterationSolution{
 	
-	List<Point> points;
-	public static int _dims;
-	public static List<Double> _ranges;
-	List<ParticleSwarm> swarms;
+	//pojedyñcze rozwi¹zanie
+	List<Particle> centroids;
 	
-	public ParticleSwarmSolution(List<Point> _points) {
-		_ranges = Point.calculateRanges(_points);
-	    _dims = _ranges.size();
-	    points = _points;
+	public ParticleSwarmSolution() {
+		centroids = new ArrayList<Particle>();
+		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public IterationSolution nextRound(IterationSolution points) {
-		// TODO Auto-generated method stub
-		for(ParticleSwarm swarm : swarms) {
-			swarm.recountVelocity();
-		}
-		rearrangeCluster();
-		
-		return null;
-	}
-
-	@Override
-	public IterationSolution initialSolution(int solutionsNum) {
-		// TODO Auto-generated method stub
-		
-		//JAK TO PODZIELIÆ??????
-		// kilka swarmow dziala na wszystkich punktach czyli bêd¹ szukaæ centroidu dla wszystkich punktow..cholera
-		
-		
-		swarms = new ArrayList<ParticleSwarm>();
-		for(int i=0; i<solutionsNum; i++) {
-			swarms.add(new ParticleSwarm());
-		}
-			
-			rearrangeCluster();
-		    
-		    
-		   return null; 
-	}
-	
-	public void rearrangeCluster() {
+	public void rearrangeCluster(List<Point> points) {
 		for(Point point: points){
-	    	for(ParticleSwarm swarm : swarms) {
-	    		  Particle closest = Particle.getNearest(swarm.particles, point);
-			      closest.clusterPoint(point);
-	    	}
-	    
-	    }
-		
+			 Particle closest = Particle.getNearest(centroids, point);
+		      closest.clusterPoint(point);
+		}
 	}
 
+	@Override
+	public double score() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String asJValue() {
+		return centroids.toString();
+	}
+	
 }
