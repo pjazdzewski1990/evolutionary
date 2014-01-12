@@ -49,8 +49,7 @@ public class Centroid extends Point{
       double sum = 0;
       Point center = this;
       for(Point p: pointsInCluster) {
-    	  //System.out.println("-------------");
-    	 // System.out.println(center);
+
         sum += Point.distance(p, center);
       }
       return sum;
@@ -115,7 +114,7 @@ public class Centroid extends Point{
 	      centroidsAsPoints.add(centroid);
 	    }
 	    return getNearestPoint(centroidsAsPoints, point);
-	  }
+  }
 
 
   
