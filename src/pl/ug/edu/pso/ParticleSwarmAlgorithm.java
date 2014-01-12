@@ -55,7 +55,7 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 			}
 		}
 			Double best = 0.0;
-			for(int j=0; j<2; j++) {
+			for(int j=0; j<200; j++) {
 				for(ParticleSwarm swarm : swarms) {
 					swarm.randomizeSpeeds();
 					swarm.recountVelocity();
@@ -67,7 +67,8 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 						best = ps.score();
 					}
 					if(ps.score()==3) {
-						//System.out.println(ps.asJValue());
+						
+						System.out.println(ps.asJValue());
 					}
 				}
 			}

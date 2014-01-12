@@ -11,7 +11,7 @@ import pl.ug.edu.evo.base.Point;
 public class Particle extends Centroid {
 	
 	private List<Double> speed;
-	private Double speedFactor = 0.1;
+
 	private SwarmInterface swarm;
 	private int dir = 1;
 	private Boolean pbest_unset = true;
@@ -34,29 +34,45 @@ public class Particle extends Centroid {
 	public void refreshSpeed() {
 		
 		List<Double> coords = getCoordinateList();
-		System.out.println("--------------------");
+		//System.out.println("--------------------");
 		for (int i=0; i<coords.size(); i++) {
 
 			
 			
 			speed.set(i, speed.get(i) + swarm.getNewSpeedVector().get(i)*(p.getCoordinate(i) - getCoordinate(i)) + swarm.getNewSpeedVector().get(i) *(swarm.getBestPoint().getCoordinate(i) - getCoordinate(i)));
-			System.out.println(speed.get(i));
-			
-			/*if(coords.get(i) + (speed.get(i) * dir) >_ranges.get(i) ) {
+
+		
+			if(coords.get(i) + (speed.get(i) * dir) >_ranges.get(i) ) {
+
 				dir = -1;
+				Double overspeed = (coords.get(i) + (speed.get(i) * dir))%_ranges.get(i);
 				
-				Double overspeed = (coords.get(i) + speed.get(i))%_ranges.get(i);
+				speed.set(i, overspeed);
+				coords.set(i, _ranges.get(i) + (overspeed*dir));
 				
-				speed.set(i, -overspeed);
+
 			}
 			
-			if(coords.get(i) + (speed.get(i) * dir)<-_ranges.get(i) ) {
+			else if(coords.get(i) + (speed.get(i) * dir) <-_ranges.get(i) ) {
+
 				dir = 1;
-				Double overspeed = (coords.get(i) + speed.get(i))%_ranges.get(i);
-				speed.set(i, -overspeed);
-			}*/
+				Double overspeed = (coords.get(i) + (speed.get(i) * dir))%_ranges.get(i);
+				
+				speed.set(i, overspeed);
+				coords.set(i, -(_ranges.get(i)) + (overspeed*dir));
+
+
+				
+				
+			} else {
+				
+				coords.set(i, coords.get(i) + (speed.get(i) * dir));
+
+			}
 			
-			coords.set(i, coords.get(i) + (speed.get(i) * dir));
+
+			
+			
 			
 		}
 	}
