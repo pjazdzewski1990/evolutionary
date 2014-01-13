@@ -12,7 +12,7 @@ import pl.ug.edu.evo.base.Point;
 public class ParticleSwarm implements SwarmInterface, IterationSolution{
 	
 	
-	public static int SWARM_SIZE = 30;
+	public static int SWARM_SIZE = 100;
 	
 	
 	List<Particle> particles;

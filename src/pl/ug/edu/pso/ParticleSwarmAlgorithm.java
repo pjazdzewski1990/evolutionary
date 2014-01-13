@@ -29,11 +29,23 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 	public IterationSolution nextRound(IterationSolution points) {
 		// TODO Auto-generated method stub
 		for(ParticleSwarm swarm : swarms) {
+			swarm.randomizeSpeeds();
 			swarm.recountVelocity();
 		}
 		rearrangeCluster();
 		
-		return null;
+		IterationSolution is = solutions.get(0);
+		
+		Double best = Double.MAX_VALUE;
+		for(ParticleSwarmSolution ps : solutions) {
+			if(ps.score()<best) {
+				is = ps;
+			}
+		}
+	
+		
+		
+		return is;
 	}
 
 	@Override
@@ -54,29 +66,24 @@ public class ParticleSwarmAlgorithm implements IterativeAlgorithm{
 				solutions.get(i).centroids.add(swarms.get(j).particles.get(i));
 			}
 		}
-			Double best = 0.0;
-			for(int j=0; j<200; j++) {
-				for(ParticleSwarm swarm : swarms) {
-					swarm.randomizeSpeeds();
-					swarm.recountVelocity();
-					
-				}
-				rearrangeCluster();
+		
+		rearrangeCluster();
+		
+			Double best = Double.MAX_VALUE;
+			
+			IterationSolution is = solutions.get(0);
+			
+			
 				for(ParticleSwarmSolution ps : solutions) {
-					if(ps.score()>best) {
-						best = ps.score();
-					}
-					if(ps.score()==3) {
-						
-						System.out.println(ps.asJValue());
+					if(ps.score()<best) {
+						is = ps;
 					}
 				}
-			}
 			
 			
 			
 		    
-		   return null; 
+		   return is; 
 	}
 	
 	public void rearrangeCluster() {

@@ -26,13 +26,13 @@ public class Launcher {
   public static void main(String[] args) {
     List<String> jsonBuffer = new ArrayList<>();
     
-    int MAX_ROUNDS = 7;
+    int MAX_ROUNDS = 6;
     int CLUSTER_NUM = 3;
     
     List<Point> environment = Point.readPointsFromFile("datasets/data_2_2.txt");
     
 //    IterativeAlgorithm alg = new KMeans(environment);
-//    IterativeAlgorithm alg = new GeneticAlgorithm(environment);
+ //   IterativeAlgorithm alg = new GeneticAlgorithm(environment);
     IterativeAlgorithm alg = new DifferentialAlgorithm(environment);
 //    IterativeAlgorithm alg = new ParticleSwarmAlgorithm(environment);
     IterationSolution solution = alg.initialSolution(CLUSTER_NUM);

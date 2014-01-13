@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.ug.edu.evo.IterationSolution;
+import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
 
 public class ParticleSwarmSolution implements IterationSolution{
@@ -28,14 +29,19 @@ public class ParticleSwarmSolution implements IterationSolution{
 
 	@Override
 	public double score() {
-		double score = 0;
-		
-		for(Particle pt : centroids) {
-			if(pt.getPointsInCluster().size()>0) {
-				score+=1;
-			}
-		}
-		return score;
+		 double score = 0;
+		    for(Centroid c : centroids){
+		    	if(score < Double.MAX_VALUE) {
+			      double partialResult = c.calculateClusterInternalDistance();
+			      if(partialResult == Double.MAX_VALUE){
+			        score = Double.MAX_VALUE;
+			        return score;
+			      }else{
+			        score += (partialResult/c.getPointsInCluster().size());
+			      }
+		    	}
+		    }
+		    return score;
 	}
 
 	@Override
