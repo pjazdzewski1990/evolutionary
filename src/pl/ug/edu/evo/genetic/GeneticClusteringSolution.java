@@ -88,19 +88,19 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
 
     //2. re-assign points to centroids
     List<Point> allPointsInSolution = getAllPointsFromClustes();
-
-
-    for(Point point : allPointsInSolution){
-      Centroid closest = Centroid.getNearestCentroid(mutatedCentroids, point);
-      closest.clusterPoint(point);
-
-      
-    }
+    updatePointsInCentroids(allPointsInSolution, mutatedCentroids);
 
     return new GeneticClusteringSolution(mutatedCentroids);
   }
 
-  private Centroid gravitate(Centroid c) {
+  public static void updatePointsInCentroids(List<Point> allPointsInSolution, List<Centroid> mutatedCentroids) {
+    for(Point point : allPointsInSolution){
+      Centroid closest = Centroid.getNearestCentroid(mutatedCentroids, point);
+      closest.clusterPoint(point);
+    }
+  }
+
+private Centroid gravitate(Centroid c) {
     Random r = new Random();
     Double[] sumAll = new Double[Centroid._dims];
 
@@ -154,7 +154,7 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     return new Centroid(Arrays.asList(sumAll));
   }
 
-  private List<Point> getAllPointsFromClustes() {
+  public List<Point> getAllPointsFromClustes() {
     List<Point> all = new ArrayList<>();
     for(Centroid c : centroids){
       all.addAll(c.getPointsInCluster());
@@ -166,7 +166,6 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     GeneticClusteringSolution instanceA,
     GeneticClusteringSolution instanceB) {
 
-    Random rand = new Random();
     List<Centroid> centroidsFromA = instanceA.getCentroids();
     List<Centroid> centroidsFromB = instanceB.getCentroids();
     
@@ -176,5 +175,11 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
     }
     
     return new GeneticClusteringSolution(result);
+  }
+  
+  @Override
+  public String toString(){
+    return "GeneticClusteringSolutions " + score() + " " + centroids.toString();
+    
   }
 }

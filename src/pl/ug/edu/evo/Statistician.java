@@ -15,15 +15,13 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
-import pl.ug.edu.evo.genetic.GeneticAlgorithm;
+import pl.ug.edu.evo.differential.DifferentialAlgorithm;
+import pl.ug.edu.evo.differential.DifferentialPopulation;
 import pl.ug.edu.evo.genetic.GeneticClusteringSolution;
-import pl.ug.edu.evo.genetic.Population;
-import pl.ug.edu.evo.kmeans.KMeans;
-import pl.ug.edu.evo.kmeans.KMeansSolution;
 
 public class Statistician {
 
-  static int MAX_ROUNDS = 540;
+  static int MAX_ROUNDS = 10;
   static int CLUSTER_NUM = 5;
 
   public static void main(String[] args) {
@@ -38,16 +36,26 @@ public class Statistician {
 //      countCorrectnes(finalResult.getPoints(), dataSet);
 //    }
     
+//    for(String dataSet : dataSets) {
+//      List<Point> environment = Point.readPointsFromFile(dataSet); 
+//      
+//      System.out.println("EVOLUTIONARY  Set: " + dataSet);
+//      Population pop = (Population)testAlgorithm(new GeneticAlgorithm(environment));
+//      GeneticClusteringSolution finalResult = pop.getSolutions().first();
+//      
+//      countCorrectnes(finalResult.getCentroids(), dataSet);
+//    }
+    
     for(int ff=0; ff<10; ff++){
     for(String dataSet : dataSets) {
-      List<Point> environment = Point.readPointsFromFile(dataSet); 
-      
-      System.out.println("EVOLUTIONARY  Set: " + dataSet);
-      Population pop = (Population)testAlgorithm(new GeneticAlgorithm(environment));
-      GeneticClusteringSolution finalResult = pop.getSolutions().first();
-      
-      countCorrectnes(finalResult.getCentroids(), dataSet);
-    }
+        List<Point> environment = Point.readPointsFromFile(dataSet); 
+        
+        System.out.println("EVOLUTIONARY  Set: " + dataSet);
+        DifferentialPopulation pop = (DifferentialPopulation)testAlgorithm(new DifferentialAlgorithm(environment));
+        GeneticClusteringSolution finalResult = pop.getSolutions().first();
+        
+        countCorrectnes(finalResult.getCentroids(), dataSet);
+      }
     }
   }
 

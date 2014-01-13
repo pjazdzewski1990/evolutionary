@@ -25,7 +25,6 @@ public class GeneticAlgorithm implements IterativeAlgorithm {
   public IterationSolution nextRound(IterationSolution previousPopulation) {
     //selection, mutation, breeding comes here
     if(previousPopulation instanceof DifferentialPopulation) {
-    	System.out.println("DIFF");
       DifferentialPopulation pop = (DifferentialPopulation)previousPopulation;
       return pop.nextPopulation();
     }

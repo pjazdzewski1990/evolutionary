@@ -2,11 +2,13 @@ package pl.ug.edu.evo.differential;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import pl.ug.edu.evo.base.Centroid;
+import pl.ug.edu.evo.base.Point;
 import pl.ug.edu.evo.genetic.GeneticClusteringSolution;
 import pl.ug.edu.evo.genetic.Population;
 
@@ -23,6 +25,8 @@ public class DifferentialPopulation extends Population {
   public Population nextPopulation() {
     //set's snapshot
     GeneticClusteringSolution[] solArray = solutions.toArray(new GeneticClusteringSolution[0]); 
+    List<Point> allPointsInTask = solArray[0].getAllPointsFromClustes();
+    
     //1. create mutants
     GeneticClusteringSolution[] mutants = createMutants(solArray);
     //2. combine them with their parents
@@ -32,7 +36,10 @@ public class DifferentialPopulation extends Population {
     all.addAll(Arrays.asList(solArray));
     all.addAll(Arrays.asList(combined));
     
-    return new DifferentialPopulation(all);
+    for(GeneticClusteringSolution gcs : all) 
+      GeneticClusteringSolution.updatePointsInCentroids(allPointsInTask, gcs.getCentroids()); 
+    Collections.sort(all);
+    return new DifferentialPopulation(all.subList(0, solArray.length+1));
   }
 
   private GeneticClusteringSolution[] combineWithParents(
