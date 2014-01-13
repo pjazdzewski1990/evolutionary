@@ -37,7 +37,6 @@ public class Launcher {
 //    IterativeAlgorithm alg = new ParticleSwarmAlgorithm(environment);
     IterationSolution solution = alg.initialSolution(CLUSTER_NUM);
     
-
     for(int round=1; round<MAX_ROUNDS; round++){
       //System.out.println(round + " " + solution.score() + " " + solution.asJValue());
       jsonBuffer.add(solution.asJValue());

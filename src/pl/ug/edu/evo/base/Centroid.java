@@ -59,7 +59,7 @@ public class Centroid extends Point{
       }
       return sum;
     }else{
-      return Double.MAX_VALUE;
+      return 0;
     }
   }
   

@@ -21,7 +21,7 @@ import pl.ug.edu.evo.genetic.GeneticClusteringSolution;
 
 public class Statistician {
 
-  static int MAX_ROUNDS = 10;
+  static int MAX_ROUNDS = 540;
   static int CLUSTER_NUM = 5;
 
   public static void main(String[] args) {
@@ -50,7 +50,7 @@ public class Statistician {
     for(String dataSet : dataSets) {
         List<Point> environment = Point.readPointsFromFile(dataSet); 
         
-        System.out.println("EVOLUTIONARY  Set: " + dataSet);
+        System.out.println("DIFFERENTIAL  Set: " + dataSet);
         DifferentialPopulation pop = (DifferentialPopulation)testAlgorithm(new DifferentialAlgorithm(environment));
         GeneticClusteringSolution finalResult = pop.getSolutions().first();
         

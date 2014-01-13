@@ -57,7 +57,7 @@ public class GeneticClusteringSolution implements IterationSolution, Comparable<
       if(centroids.equals(o.centroids)){
         return 0;
       } else {
-        return 1; //they both are as good, take any
+        return 0; //they both are as good, take any
       }
     }
   }
