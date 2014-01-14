@@ -1,6 +1,6 @@
-# Algorytmy inspirowane natur¹ 2013/2014
-## Marcin G³ombiowski
-## Patryk Ja¿d¿ewski
+#Algorytmy inspirowane natur¹ 2013/2014
+### Marcin G³ombiowski
+### Patryk Ja¿d¿ewski
 
 --------
 
@@ -15,7 +15,9 @@ Dane:
 pliki z danymi znajduj¹ siê w folderze datasets
 
 struktura: 
+```
 [pozycja w wymiarze 1] [pozycja w wymiarze 2] ...[pozycja w wymiarze n]  - ka¿da linia oznacza kolejny punkt
+```
 
 
 Uruchamianie:
