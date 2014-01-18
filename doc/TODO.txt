@@ -1,0 +1,14 @@
+1. W pracy nie ma wyraźnego określenia, jak interpretować chromosom. Obawiam się, że nikt nie zajrzal do sekcji A pracy "A Survey of Evolutionary Algorithms for Clustering". Tam są opisane różnorodne reprezentacje rozwiązania. Jak u Państwa wygląda rozwiązanie? Co podlega ewolucji?
+TODO
+
+2. Jeśli nie wiemy jak interpretować chromosom, trudno ocenić zastosowane operatory genetyczne.
+TODO
+
+3. Brakuje jasnego określenia jak oceniamy chromosom?
+TODO
+
+4. Nie wiadomo na jakim zbiorze danych działamy. Ja sugerowałem NAJPIERW zajrzeć na stronę http://www.isical.ac.in/~sanghami/data.html (datasets1), gdzie mamy w miarę łatwe zbiory zawierające 3,5,6, 10 skupień. Należało zacząć od tych danych, aby dopasować swój algorytm. A dopiero potem można sięgać do bardziej złożonych danych.
+TODO - DONE
+
+4. Brakuje uwag odnośnie wyników działania algorytmu. A więc: ZNAMY rzeczywistą przynależność obiektów do grup,a jak wygląda ich przynależność proponowana przez algorytm?
+TODO
