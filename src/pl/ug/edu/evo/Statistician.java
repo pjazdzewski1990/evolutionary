@@ -9,54 +9,82 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.text.Position;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import pl.ug.edu.evo.base.Centroid;
 import pl.ug.edu.evo.base.Point;
 import pl.ug.edu.evo.differential.DifferentialAlgorithm;
 import pl.ug.edu.evo.differential.DifferentialPopulation;
+import pl.ug.edu.evo.genetic.GeneticAlgorithm;
 import pl.ug.edu.evo.genetic.GeneticClusteringSolution;
+import pl.ug.edu.evo.genetic.Population;
+import pl.ug.edu.evo.kmeans.KMeans;
+import pl.ug.edu.evo.kmeans.KMeansSolution;
+import pl.ug.edu.pso.Particle;
+import pl.ug.edu.pso.ParticleSwarmAlgorithm;
+import pl.ug.edu.pso.ParticleSwarmSolution;
 
 public class Statistician {
 
   static int MAX_ROUNDS = 540;
-  static int CLUSTER_NUM = 5;
+  static int CLUSTER_NUM = 6;
 
   public static void main(String[] args) {
-    String[] dataSets = {"datasets/data_5_2.txt"};
+    String[] dataSets = {"datasets/data_6_2.txt"};
     
-//    for(String dataSet : dataSets) {
-//      List<Point> environment = Point.readPointsFromFile(dataSet); 
-//      
-//      System.out.println("KMEANS  Set: " + dataSet);
-//      KMeansSolution finalResult = (KMeansSolution)testAlgorithm(new KMeans(environment));
-//      
-//      countCorrectnes(finalResult.getPoints(), dataSet);
-//    }
+    System.out.println("" + MAX_ROUNDS + ";");
     
-//    for(String dataSet : dataSets) {
-//      List<Point> environment = Point.readPointsFromFile(dataSet); 
+//    for(int ff=0; ff<10; ff++){
+//      for(String dataSet : dataSets) {
+//        List<Point> environment = Point.readPointsFromFile(dataSet); 
 //      
-//      System.out.println("EVOLUTIONARY  Set: " + dataSet);
-//      Population pop = (Population)testAlgorithm(new GeneticAlgorithm(environment));
-//      GeneticClusteringSolution finalResult = pop.getSolutions().first();
-//      
-//      countCorrectnes(finalResult.getCentroids(), dataSet);
+//        //System.out.println("KMEANS  Set: " + dataSet);
+//        KMeansSolution finalResult = (KMeansSolution)testAlgorithm(new KMeans(environment));
+//        
+//        countCorrectnes(finalResult.getPoints(), dataSet);
+//      }
 //    }
+//    System.out.println("\n\n");
+//    
+//    for(int ff=0; ff<10; ff++){
+//      for(String dataSet : dataSets) {
+//        List<Point> environment = Point.readPointsFromFile(dataSet); 
+//      
+//        //System.out.println("EVOLUTIONARY  Set: " + dataSet);
+//        Population pop = (Population)testAlgorithm(new GeneticAlgorithm(environment));
+//        GeneticClusteringSolution finalResult = pop.getSolutions().first();
+//      
+//        countCorrectnes(finalResult.getCentroids(), dataSet);
+//      }
+//    }
+//    System.out.println("\n\n");
+//    
+//    for(int ff=0; ff<10; ff++){
+//      for(String dataSet : dataSets) {
+//        List<Point> environment = Point.readPointsFromFile(dataSet); 
+//        
+//        //System.out.println("DIFFERENTIAL  Set: " + dataSet);
+//        DifferentialPopulation pop = (DifferentialPopulation)testAlgorithm(new DifferentialAlgorithm(environment));
+//        GeneticClusteringSolution finalResult = pop.getSolutions().first();
+//      
+//        countCorrectnes(finalResult.getCentroids(), dataSet);
+//      }
+//    }
+//    System.out.println("\n\n");
     
     for(int ff=0; ff<10; ff++){
-    for(String dataSet : dataSets) {
+      for(String dataSet : dataSets) {
         List<Point> environment = Point.readPointsFromFile(dataSet); 
+      
+        //System.out.println("KMEANS  Set: " + dataSet);
+        ParticleSwarmSolution finalResult = (ParticleSwarmSolution)testAlgorithm(new ParticleSwarmAlgorithm(environment));
         
-        System.out.println("DIFFERENTIAL  Set: " + dataSet);
-        DifferentialPopulation pop = (DifferentialPopulation)testAlgorithm(new DifferentialAlgorithm(environment));
-        GeneticClusteringSolution finalResult = pop.getSolutions().first();
-        
-        countCorrectnes(finalResult.getCentroids(), dataSet);
+        List<Centroid> centroids = new ArrayList<>();
+        for(Particle p: finalResult.centroids){
+          centroids.add(p);
+        }
+        countCorrectnes(centroids, dataSet);
       }
     }
+    System.out.println("\n\n");
   }
 
   private static IterationSolution testAlgorithm(IterativeAlgorithm alg) {
@@ -76,7 +104,7 @@ public class Statistician {
     
     Date future = new Date();
     long time = future.getTime() - past.getTime();
-    System.out.println("  time:" + time + " best:" + best.score()+ " worst:" + worst.score() + " final:" + solution.score());
+    System.out.print("" + time + "," + best.score()+ "," + solution.score() + ",");
     
     return solution;
   }
@@ -115,7 +143,7 @@ public class Statistician {
     }
     
     double all = (double)pointsData.size();
-    System.out.println("MaxFit: " + maxFit + " " + (100 * maxFit/all) + "%");
+    System.out.println("" + maxFit + "," + (100 * maxFit/all) + "%;");
   }
 
   private static List<Double[]> parseDatasetFile(String path) {

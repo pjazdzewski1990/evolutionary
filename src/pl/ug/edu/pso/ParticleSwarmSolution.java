@@ -9,8 +9,8 @@ import pl.ug.edu.evo.base.Point;
 
 public class ParticleSwarmSolution implements IterationSolution{
 	
-	//pojedyñcze rozwi¹zanie
-	List<Particle> centroids;
+	//pojedyï¿½cze rozwiï¿½zanie
+	public List<Particle> centroids;
 	
 	public ParticleSwarmSolution() {
 		centroids = new ArrayList<Particle>();
@@ -37,7 +37,7 @@ public class ParticleSwarmSolution implements IterationSolution{
 			        score = Double.MAX_VALUE;
 			        return score;
 			      }else{
-			        score += (partialResult/c.getPointsInCluster().size());
+			        score += (partialResult/*/c.getPointsInCluster().size()*/);
 			      }
 		    	}
 		    }
