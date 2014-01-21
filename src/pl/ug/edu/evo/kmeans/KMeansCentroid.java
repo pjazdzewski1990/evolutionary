@@ -21,7 +21,7 @@ public class KMeansCentroid extends Centroid{
 		    Random generator = new Random();
 		    List<Double> pos = new ArrayList<>();
 		    double number = pointsInCluster.size();
-
+		    if(getPointsInCluster().size()>0) {
 		    for(int dim=0; dim<getCoordinateList().size(); dim++){
 		      if(number > 0){
 		        double sum = 0;
@@ -33,8 +33,13 @@ public class KMeansCentroid extends Centroid{
 		        pos.add(generator.nextDouble());
 		      }
 		    }
-
 		    return new KMeansCentroid(pos);
+		    } else {
+		    	Centroid ct = randomCentroid(_dims, _ranges);
+		    	 return new KMeansCentroid(ct.getCoordinateList());
+		    }
+
+		   
 		  }
 
 	 
